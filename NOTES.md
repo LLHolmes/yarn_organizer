@@ -48,12 +48,14 @@ end
   [ ] public vs. private??? -->
   [ ] add a trading post.
 
-Add pattern url option to Projects table.
+Add specific pattern url option to Projects table?
 Index sends you to log in if not already logged in.
 Log in has link to sign up (Join the community). - Either sends you to your index.
 Once logged in, shows welcome with master index of things individual user can do:
  - start a new project / add a new yarn/accessory
  - find my project/yarn/accessory
+
+ How to send an error when login/signup not successful the first time
 
 
 Specifications for the Sinatra Assessment

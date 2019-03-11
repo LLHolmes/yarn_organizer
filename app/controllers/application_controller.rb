@@ -5,11 +5,15 @@ class ApplicationController < Sinatra::Base
     set :views, 'app/views'
     enable :sessions
     set :session_secret, "i<3yarn"
+    register Sinatra::Flash
   end
 
   get '/' do
-    # "Welcome page"
-    erb :index
+    if logged_in?
+      erb :index
+    else
+      erb :"user/login"
+    end
   end
 
   helpers do
