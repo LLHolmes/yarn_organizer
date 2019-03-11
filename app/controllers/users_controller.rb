@@ -43,18 +43,10 @@ class UsersController < ApplicationController
   get '/account' do
     if logged_in?
       erb :"user/account"
-      # binding.pry
     else
       redirect '/login'
     end
   end
-
-  # get '/account/:id' do
-  #   if current_user.id == params[:id]
-  #     erb :"user/account"
-  #   end
-  #   redirect '/login'
-  # end
 
   patch '/account/:id' do
     user = User.find(params[:id])
