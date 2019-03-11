@@ -15,36 +15,45 @@ end
 # App Overview
   -- An app to help organize one's yarn stash, crafting accessories, and project usage and plans.
 # Users will need to:
-  -- Log in, sign up, and log out.
+  [ ] Log in, sign up, and log out.
 # Users will be able to:
-  -- Create a new project.
-  -- Add yarn to their stash. - Add a new brand if necessary, or associate it with an existing brand.
-  -- Add accessories to their horde.
-  -- See all projects.
-  -- See a list of their entire yarns stash.
-  -- Explore their brands.
-  -- See a list of their accessories.
-  -- Edit projects.
-  -- Edit yarn.
-  -- Edit brands.
-  -- Edit accessories.
-  -- Delete projects.
-  -- Delete yarns.
-  -- Delete brands.
-  -- Delete accessories.
+  [ ] Create a new project.
+  [ ] Add yarn to their stash. - Add a new brand if necessary, or associate it with an existing brand.
+  [ ] Add accessories to their horde.
+  [ ] See all projects.
+  [ ] See a list of their entire yarns stash.
+  [ ] Explore their brands.
+  [ ] See a list of their accessories.
+  [ ] Edit projects.
+  [ ] Edit yarn.
+  [ ] Edit brands.
+  [ ] Edit accessories.
+  [ ] Delete projects.
+  [ ] Delete yarns.
+  [ ] Delete brands.
+  [ ] Delete accessories.
 # Wireframing
   -- Models: User, Project, Yarn, Brand, Accessories
   -- User: name, email (for unique login), password (password_digest in database)
   -- Rest on paper...
 # Stretch goals
-  -- CSS
-  -- Tests?
-  -- link to patterns / images etc.
-  -- write a pattern.
-  -- add hobbies to users?
-  -- add color_family to yarns?
-  -- add laundering instructions to brand?
+  [ ] CSS
+  [ ] Tests?
+  [ ] link to patterns / images etc.
+  [ ] write a pattern???
+  [ ] add hobbies to users?
+  [ ] add color_family to yarns?
+  [ ] add location/where_to_find to projects?
+  [ ] add laundering instructions to brand?
+  [ ] public vs. private??? -->
+  [ ] add a trading post.
 
+Add pattern url option to Projects table.
+Index sends you to log in if not already logged in.
+Log in has link to sign up (Join the community). - Either sends you to your index.
+Once logged in, shows welcome with master index of things individual user can do:
+ - start a new project / add a new yarn/accessory
+ - find my project/yarn/accessory
 
 
 Specifications for the Sinatra Assessment
@@ -52,7 +61,8 @@ Specifications for the Sinatra Assessment
 Specs:
 - [x] Use Sinatra to build the app
     -- I am using Sinatra as the basis for my app.
-- [ ] Use ActiveRecord for storing information in a database
+- [x] Use ActiveRecord for storing information in a database
+    -- My databases depend on ActiveRecord.
 - [x] Include more than one model class (e.g. User, Post, Category)
     -- I have 5 categories.
 - [x] Include at least one has_many relationship on your User model (e.g. User has_many Posts)

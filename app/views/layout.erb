@@ -1,0 +1,34 @@
+<!doctype html>
+<html>
+  <head>
+    <title>Yarn Organizer</title>
+    <!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css"> -->
+  </head>
+  <body>
+    <nav>
+      <% if logged_in? %>
+
+        <!-- <a href="/clubs/new"> Create Club </a> -->
+        <!-- create a new project, add a new yarn, add an accessory -->
+        <!-- view/find my projects, view/find my yarn collection, view/find my accessories -->
+        <a href="/logout"> Log Out </a>
+        <p>Welcome, <%=current_user.name %></p>
+
+      <% else %>
+        <a href="/login"> Log In </a>
+        <a href="/signup">Sign Up</a>
+      <%end %>
+
+    </nav>
+    <div class="container">
+      <%# <% if !@error_message.nil? %> %>
+      <!-- <div class="alert alert-warning">
+        <%# <%= @error_message %> %>
+      </div> -->
+    <%# <% end %> %>
+      <%= yield %>
+    </div>
+    <!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script> -->
+  </body>
+</html>

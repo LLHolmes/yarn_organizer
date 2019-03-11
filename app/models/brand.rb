@@ -1,3 +1,3 @@
 class Brand < ActiveRecord::Base
-  has_many :Yarns
+  has_many :yarns
 end

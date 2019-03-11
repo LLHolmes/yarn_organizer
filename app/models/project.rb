@@ -1,6 +1,6 @@
 class Project < ActiveRecord::Base
-  belongs_to :User
-  has_many :Yarns
-  has_many :Brands, through: :Yarns
-  has_many :Accessories
+  belongs_to :user
+  has_many :yarns
+  has_many :brands, through: :Yarns
+  has_many :accessories
 end
