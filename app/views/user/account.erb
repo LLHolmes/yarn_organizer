@@ -1,1 +1,14 @@
-account.erb
+<h1>Hello, <%= current_user.name %>!</h1>
+<h3>Update your account:</h3>
+  <form action="/account/<%= current_user.id %>" method="post">
+    <input id="hidden" type="hidden" name="_method" value="patch">
+    <label for="name">Name: </label><input type="text" name="name" placeholder="<%= current_user.name%>"><br>
+    <label for="email">Email: </label><input type="text" name="email" placeholder="<%= current_user.email%>"><br>
+    <label for="password">New Password: </label><input type="text" name="password"><br>
+    <input type="submit" value="Update">
+  </form>
+
+<form action="/account/<%= current_user.id %>/delete" method="post">
+  <input id="hidden" type="hidden" name="_method" value="delete">
+  <input type="submit" value="Delete Account">
+</form>

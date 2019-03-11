@@ -11,12 +11,15 @@
         <!-- <a href="/clubs/new"> Create Club </a> -->
         <!-- create a new project, add a new yarn, add an accessory -->
         <!-- view/find my projects, view/find my yarn collection, view/find my accessories -->
-        <a href="/logout"> Log Out </a>
-        <p>Welcome, <%=current_user.name %></p>
+        <p><a href="/projects">My Projects</a></p>
+        <p><a href="/yarns">My Stash</a></p>
+        <p><a href="/accessories">My Tools</a></p>
+        <p><a href="/account">Account Details</a></p>
+        <p><a href="/logout">Log Out</a></p>
 
       <% else %>
-        <a href="/login">Log In</a>
-        <a href="/signup">Join</a>
+        <p><a href="/login">Log In</a></p>
+        <p><a href="/signup">Join</a></p>
       <% end %>
 
     </nav>
@@ -29,7 +32,7 @@
     <% end %>
 
       <%= yield %>
-      
+
     </div>
     <!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script> -->

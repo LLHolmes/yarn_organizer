@@ -5,13 +5,11 @@ class UsersController < ApplicationController
   end
 
   get '/signup' do
-    # flash.now[:info] = "Please sign up."
     erb :"user/signup"
   end
 
   post '/signup' do
-    if params.value? == ""
-    # if params[:username] == "" || params[:email] == "" || params[:password] == ""
+    if params[:name] == "" || params[:email] == "" || params[:password] == ""
       flash.next[:error] = "Please fill out all fields."
       redirect '/signup'
     elsif User.find_by_email(params[:email])
@@ -29,20 +27,26 @@ class UsersController < ApplicationController
   end
 
   post '/login' do
-    user = User.find_by_email(params[:email])
-    if user
-      session[:user_id] = user.id
-      redirect '/'
+    if params[:email] == "" || params[:password] == ""
+      flash.next[:error] = "Please fill out all fields."
+      redirect '/login'
+    else
+      user = User.find_by_email(params[:email])
+      if user && user.authenticate(params[:password])
+        session[:user_id] = user.id
+        redirect '/'
+      end
     end
-    flash.next[:error] = "Something went wrong.  Please try again."
-    redirect '/login'
+    redirect '/signup'
   end
 
   get '/account' do
     if logged_in?
       erb :"user/account"
+      # binding.pry
+    else
+      redirect '/login'
     end
-    redirect '/login'
   end
 
   # get '/account/:id' do
@@ -53,18 +57,18 @@ class UsersController < ApplicationController
   # end
 
   patch '/account/:id' do
-    if current_user.id == params[:id]
-      user = User.find(params[:id])
-      user.update(params)
-      redirect "/account/#{user.id}"
-    end
-    flash.next[:error] = "You can only make changes to your account."
-    redirect '/login'
+    user = User.find(params[:id])
+    user.name = params[:name] unless params[:name] == ""
+    user.email = params[:email] unless params[:email] == ""
+    user.password = params[:password] unless params[:password] == ""
+    user.save
+    redirect "/account"
   end
 
-  delete '/account/:id' do
-    if current_user.id == params[:id]
-      User.find(params[:id]).destroy
+  delete '/account/:id/delete' do
+    if logged_in
+      User.find(params[:id]).delete
+      session.clear
     end
     redirect '/'
   end

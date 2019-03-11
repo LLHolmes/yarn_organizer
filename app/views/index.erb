@@ -1,22 +1,22 @@
-<h1>Welcome, Crafter!</h1>
+<h1>Welcome, <%= current_user.name %>!</h1>
 <h2>How can we help you get organized today?</h2>
 <h3>Your Projects:</h3>
 <ul>
-  <% current_user.project.each do |wip| %>
+  <% current_user.projects.each do |wip| %>
   <li><a href="/project/<%= wip.id %>"><%= wip.name %></a></li>
   <% end %>
 </ul>
 
 <h3>Your Yarn:</h3>
 <ul>
-  <% current_user.yarn.each do |item| %>
+  <% current_user.yarns.each do |item| %>
   <li><a href="/brand/<%= item.brand.id %>"><%= item.brand.name %></a> - <a href="/yarn/<%= item.id %>"><%= item.color %></a></li>
   <% end %>
 </ul>
 
 <h3>Your Accessories:</h3>
 <ul>
-  <% current_user.accessory.each do |item| %>
+  <% current_user.accessories.each do |item| %>
   <li><a href="/accessory/<%= item.id %>"><%= item.name %></a></li>
   <% end %>
 </ul>
