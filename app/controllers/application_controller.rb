@@ -8,7 +8,7 @@ class ApplicationController < Sinatra::Base
   end
 
   get '/' do
-    # Welcome page
+    # "Welcome page"
     erb :index
   end
 
