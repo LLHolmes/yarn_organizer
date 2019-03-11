@@ -1,0 +1,11 @@
+<h1>Your Projects</h1>
+<h3>Finished:</h3>
+<ul>
+  <% current_user.projects.each do |wip| %>
+  <li><a href="/project/<%= wip.id %>"><%= wip.name %></a></li>
+  <% end %>
+</ul>
+
+<h3>In Progress:</h3>
+
+<h3>Upcoming:</h3>
