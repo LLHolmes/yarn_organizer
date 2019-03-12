@@ -3,20 +3,20 @@
 <h3>Your Projects:</h3>
 <ul>
   <% current_user.projects.each do |wip| %>
-  <li><a href="/project/<%= wip.id %>"><%= wip.name %></a></li>
+  <li><a href="/projects/<%= wip.id %>"><%= wip.name %></a></li>
   <% end %>
 </ul>
 
 <h3>Your Yarn:</h3>
 <ul>
   <% current_user.yarns.each do |item| %>
-  <li><a href="/brand/<%= item.brand.id %>"><%= item.brand.name %></a> - <a href="/yarn/<%= item.id %>"><%= item.color %></a></li>
+  <li><a href="/brands/<%= item.brand.id %>"><%= item.brand.name %></a> - <a href="/yarns/<%= item.id %>"><%= item.color %></a></li>
   <% end %>
 </ul>
 
 <h3>Your Accessories:</h3>
 <ul>
   <% current_user.accessories.each do |item| %>
-  <li><a href="/accessory/<%= item.id %>"><%= item.name %></a></li>
+  <li><a href="/accessories/<%= item.id %>"><%= item.name %></a></li>
   <% end %>
 </ul>

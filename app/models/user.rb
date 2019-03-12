@@ -8,4 +8,16 @@ class User < ActiveRecord::Base
 
   # Validate uniqueness of user login attribute (username or email)
 
+  def projects_finished
+    self.projects.select { |project| project if project.status == "Finished" }
+  end
+
+  def projects_wip
+    self.projects.select { |project| project if project.status == "In Progress" }
+  end
+
+  def projects_upcoming
+    self.projects.select { |project| project if project.status == "Upcoming" }
+  end
+
 end

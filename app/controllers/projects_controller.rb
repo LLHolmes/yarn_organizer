@@ -1,9 +1,9 @@
 class ProjectsController < ApplicationController
 
   get '/projects' do
-    @wip = Project.status_wip(current_user.id)
-    @upcoming = Project.status_upcoming(current_user.id)
-    @finished = Project.status_finished(current_user.id)
+    @wip = current_user.projects_wip
+    @upcoming = current_user.projects_upcoming
+    @finished = current_user.projects_finished
     erb :"project/index_projects"
   end
 
@@ -20,6 +20,7 @@ class ProjectsController < ApplicationController
       redirect '/projects/new'
     else
       project = Project.new(params)
+      project.user = current_user
       if project.save
         redirect "/projects/#{project.id}"
       end
@@ -30,9 +31,9 @@ class ProjectsController < ApplicationController
 
   get '/projects/:id' do
     # if logged_in?
-    #   erb :"user/account"
+      erb :"project/show_project"
     # else
-      redirect '/projects'
+      # redirect '/projects/'
     # end
   end
 

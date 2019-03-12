@@ -1,23 +1,29 @@
 <h1>Your Projects</h1>
-<h3>In Progress:</h3>
-  <% @wip.each do |project| %>
-  <div>
-    <a href="/project/<%= project.id %>"><%= project.name %></a>
-  </div>
-  <% end %>
+<% if !@wip.empty? %>
+  <h3>In Progress:</h3>
+    <% @wip.each do |project| %>
+    <div>
+      <a href="/projects/<%= project.id %>"><%= project.name %></a>
+    </div>
+    <% end %>
+<% end %>
 
-<h3>Upcoming:</h3>
-  <% @upcoming.each do |project| %>
-  <div>
-    <a href="/project/<%= project.id %>"><%= project.name %></a>
-  </div>
-  <% end %>
+<% if !@upcoming.empty? %>
+  <h3>Upcoming:</h3>
+    <% @upcoming.each do |project| %>
+    <div>
+      <a href="/projects/<%= project.id %>"><%= project.name %></a>
+    </div>
+    <% end %>
+<% end %>
 
-<h3>Finished:</h3>
-  <% @finished.each do |project| %>
-  <div>
-    <a href="/project/<%= project.id %>"><%= project.name %></a>
-  </div>
-  <% end %>
+<% if !@finished.empty? %>
+  <h3>Finished:</h3>
+    <% @finished.each do |project| %>
+    <div>
+      <a href="/projects/<%= project.id %>"><%= project.name %></a>
+    </div>
+    <% end %>
+<% end %>
 
-<p><a href="/project/new">New Project</a></p>
+<p><a href="/projects/new">New Project</a></p>
