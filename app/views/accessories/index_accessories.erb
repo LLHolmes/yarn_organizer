@@ -1,0 +1,34 @@
+<h1>Your Accessories</h1>
+
+<h1>ADD UPDATE PROJECT TO EACH ACCESSORY???</h1>
+
+<% current_user.accessories.each do |acc| %>
+  <div>
+    <p><%= acc.name %></p>
+    <p>Current Project: <%= acc.project.name %></p>
+
+    <form action="/accessories/<%= @accessory.id %>" method="post">
+      <input id="hidden" type="hidden" name="_method" value="patch">
+      <label for="project">Update Project: </label>
+      <select name="project">
+        <% current_user.projects.each do |project| %>
+          <option value="<%= project.id %>"> <%= project.name %> </option>
+        <% end %>
+      </select>
+      <input type="submit" value="Update">
+    </form>
+
+    <form action="/accessories/<%= @accessory.id %>/edit" method="get">
+      <input type="submit" value="Update Tool">
+    </form>
+
+    <form action="/accessories/<%= @accessory.id %>/delete" method="post">
+      <input id="hidden" type="hidden" name="_method" value="delete">
+      <input type="submit" value="Delete Tool">
+    </form>
+  </div>
+<% end %>
+
+<form action="/accessories/new" method="get">
+  <input type="submit" value="Add Tool">
+</form>

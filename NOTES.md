@@ -38,15 +38,16 @@ end
   -- Rest on paper...
 # Stretch goals
   [ ] CSS
-  [ ] Tests?
   [ ] link to patterns / images etc.
   [ ] write a pattern???
-  [ ] add hobbies to users?
+  [ ] add hobbies to users???
   [ ] add color_family to yarns?
-  [ ] add location/where_to_find to projects?
+  [ ] add location/where_to_find to projects???
   [ ] add laundering instructions to brand?
   [ ] public vs. private??? -->
   [ ] add a trading post.
+  [ ] add this project to my project list.
+  [ ] create index of all projects for inspiration?
 
 Add specific pattern url option to Projects table?
 Index sends you to log in if not already logged in.
@@ -72,7 +73,7 @@ Specs:
     -- Many, but: A User has_many Projects, Yarns, Accessories, and Brands
 - [x] Include at least one belongs_to relationship on another model (e.g. Post belongs_to User)
     -- Many, but: Yarns belongs_to a Project and a Brand
-- [ ] Include user accounts with unique login attribute (username or email)
+- [x] Include user accounts with unique login attribute (username or email)
 - [ ] Ensure that the belongs_to resource has routes for Creating, Reading, Updating and Destroying
 - [ ] Ensure that users can't modify content created by other users
 - [ ] Include user input validations
