@@ -1,13 +1,10 @@
-<h2>Add a new project:</h2>
-<form action="/projects/new" method="post">
-  <input type="text" name="name" placeholder="project name">
-  <select name="status">
-  	<option value="In Progress" selected> In Progress </option>
-  	<option value="Upcoming"> Upcoming </option>
-  	<option value="Finished"> Finished </option>
-  </select>
+<h2>Add a new tool:</h2>
+<form action="/accessories/new" method="post">
+  <input type="text" name="name" placeholder="tool name">
+  <label for="project">Add to a project? </label>
+  <% current_user.projects.each do |project| %>
+    <input type="radio" name="project" value="<%= project.id %>"> <%= project.name %>
+  <% end %>
   <br>
-  <input type="text" name="pattern_info" placeholder="pattern information"><br>
-  <input type="text" name="notes" placeholder="notes"><br>
   <input type="submit" value="Add">
 </form>

@@ -18,6 +18,9 @@ class UsersController < ApplicationController
     else
       user = User.new(params)
       if user.save
+        stash = Project.new(name: "Stash", status: "Perpetual")
+        stash.user = user
+        stash.save
         session[:user_id] = user.id
         redirect '/'
       end
@@ -58,7 +61,7 @@ class UsersController < ApplicationController
   end
 
   delete '/account/:id/delete' do
-    if logged_in
+    if logged_in?
       User.find(params[:id]).delete
       session.clear
     end

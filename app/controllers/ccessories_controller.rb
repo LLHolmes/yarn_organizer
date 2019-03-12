@@ -1,60 +1,57 @@
 class CcessoriesController < ApplicationController
 
-  # get '/accessories' do
-  #   @wip = current_user.projects_wip
-  #   @upcoming = current_user.projects_upcoming
-  #   @finished = current_user.projects_finished
-  #   erb :"projects/index_projects"
-  # end
-  #
-  # get '/projects/new' do
-  #   erb :"projects/new_project"
-  # end
-  #
-  # post '/projects/new' do
+  get '/accessories' do
+    erb :"accessories/index_accessories"
+  end
+
+  get '/accessories/new' do
+    erb :"accessories/new_accessory"
+  end
+  
+  # post '/accessories/new' do
   #   if params[:name] == "" || params[:status] == ""
   #     flash.now[:error] = "A name and status are required to create a new project."
-  #     redirect '/projects/new'
+  #     redirect '/accessories/new'
   #   elsif Project.find_by_name(params[:name])
   #     flash.now[:warning] = "You already have a project with that name. Please choose another."
-  #     redirect '/projects/new'
+  #     redirect '/accessories/new'
   #   else
   #     project = Project.new(params)
   #     project.user = current_user
   #     if project.save
-  #       redirect "/projects/#{project.id}"
+  #       redirect "/accessories/#{project.id}"
   #     end
   #   end
   #   flash.now[:error] = "Something went wrong.  Please try again."
-  #   redirect '/projects/new'
+  #   redirect '/accessories/new'
   # end
   #
-  # get '/projects/:id' do
+  # get '/accessories/:id' do
   #   @project = Project.find(params[:id])
-  #   erb :"projects/show_project"
+  #   erb :"accessories/show_accessory"
   # end
   #
-  # get '/projects/:id/edit' do
+  # get '/accessories/:id/edit' do
   #   @project = Project.find(params[:id])
   #   if current_user == @project.user
-  #     erb :"projects/edit_project"
+  #     erb :"accessories/edit_accessory"
   #   end
   #   flash.next[:error] = "You may not edit other crafter's projects."
-  #   redirect '/projects'
+  #   redirect '/accessories'
   # end
   #
-  # patch '/projects/:id' do
+  # patch '/accessories/:id' do
   #   @project = Project.find(params[:id])
   #   if current_user == @project.user
   #     params.delete('_method')
   #     @project.update(params)
-  #     redirect "/projects/#{@project.id}"
+  #     redirect "/accessories/#{@project.id}"
   #   end
   #   flash.now[:error] = "You may not edit other crafter's projects."
-  #   redirect '/projects'
+  #   redirect '/accessories'
   # end
   #
-  # delete '/projects/:id/delete' do
+  # delete '/accessories/:id/delete' do
   #   @project = Project.find(params[:id])
   #   if current_user == @project.user
   #     # yarn = @project.yarns
@@ -63,7 +60,7 @@ class CcessoriesController < ApplicationController
   #   else
   #     flash.now[:error] = "You may not delete other crafter's projects."
   #   end
-  #   redirect '/projects'
+  #   redirect '/accessories'
   # end
 
 end
