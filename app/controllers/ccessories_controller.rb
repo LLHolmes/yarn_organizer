@@ -7,25 +7,25 @@ class CcessoriesController < ApplicationController
   get '/accessories/new' do
     erb :"accessories/new_accessory"
   end
-  
-  # post '/accessories/new' do
-  #   if params[:name] == "" || params[:status] == ""
-  #     flash.now[:error] = "A name and status are required to create a new project."
-  #     redirect '/accessories/new'
-  #   elsif Project.find_by_name(params[:name])
-  #     flash.now[:warning] = "You already have a project with that name. Please choose another."
-  #     redirect '/accessories/new'
-  #   else
-  #     project = Project.new(params)
-  #     project.user = current_user
-  #     if project.save
-  #       redirect "/accessories/#{project.id}"
-  #     end
-  #   end
-  #   flash.now[:error] = "Something went wrong.  Please try again."
-  #   redirect '/accessories/new'
-  # end
-  #
+
+  post '/accessories/new' do
+    if params[:name] == ""
+      flash.now[:error] = "Please give your tool a name."
+      redirect '/accessories/new'
+    elsif Accessory.find_by_name(params[:name])
+      flash.now[:warning] = "You already have a tool with that name. Please choose another."
+      redirect '/accessories/new'
+    else
+      tool = Accessory.new(params[:name])
+      tool.project = Project.find(params[:project])
+      if tool.save
+        redirect "/accessories/#{tool.id}"
+      end
+    end
+    flash.now[:error] = "Something went wrong.  Please try again."
+    redirect '/accessories/new'
+  end
+
   # get '/accessories/:id' do
   #   @project = Project.find(params[:id])
   #   erb :"accessories/show_accessory"

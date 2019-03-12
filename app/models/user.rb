@@ -6,15 +6,6 @@ class User < ActiveRecord::Base
 
   has_secure_password
 
-  # Validate uniqueness of user login attribute (username or email)
-
-  # def self.create(name, email, password)
-  #   user = self.new (name: name, email: email, password: password)
-  #   user.create_project(name: "Stash", status: "Perpetual")
-  #   user.save
-  #   @@all << user
-  # end
-
   def projects_finished
     self.projects.select { |project| project.status == "Finished" }
   end
