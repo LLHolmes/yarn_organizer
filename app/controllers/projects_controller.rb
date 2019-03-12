@@ -1,53 +1,55 @@
 class ProjectsController < ApplicationController
 
-  get '/project/' do
+  get '/projects' do
+    @wip = Project.status_wip(current_user.id)
+    @upcoming = Project.status_upcoming(current_user.id)
+    @finished = Project.status_finished(current_user.id)
     erb :"project/index_projects"
   end
 
-  get '/project/new' do
+  get '/projects/new' do
     erb :"project/new_project"
   end
 
-  post '/project/new' do
-    # if params[:name] == "" || params[:email] == "" || params[:password] == ""
-    #   flash.next[:error] = "Please fill out all fields."
-    #   redirect '/signup'
-    # elsif User.find_by_email(params[:email])
-    #   flash.next[:warning] = "It looks like you're already a memeber of our community. Please log in."
-    #   redirect '/login'
-    # else
-    #   user = User.new(params)
-    #   if user.save
-    #     session[:user_id] = user.id
-    #     redirect '/'
-    #   end
-    # end
-    # flash.next[:error] = "Something went wrong.  Please try again."
-    # redirect '/signup'
+  post '/projects/new' do
+    if params[:name] == "" || params[:status] == ""
+      flash.next[:error] = "A name and status are required to create a new project."
+      redirect '/projects/new'
+    elsif Project.find_by_name(params[:name])
+      flash.next[:warning] = "You already have a project with that name. Please choose another."
+      redirect '/projects/new'
+    else
+      project = Project.new(params)
+      if project.save
+        redirect "/projects/#{project.id}"
+      end
+    end
+    flash.next[:error] = "Something went wrong.  Please try again."
+    redirect '/projects/new'
   end
 
-  get '/project/:id' do
+  get '/projects/:id' do
     # if logged_in?
     #   erb :"user/account"
     # else
-      redirect '/project/'
+      redirect '/projects'
     # end
   end
 
-  patch '/project/:id' do
+  patch '/projects/:id' do
     # user = User.find(params[:id])
     # user.name = params[:name] unless params[:name] == ""
     # user.email = params[:email] unless params[:email] == ""
     # user.password = params[:password] unless params[:password] == ""
     # user.save
-    redirect "/project/:id"
+    redirect "/projects/:id"
   end
 
-  delete '/project/:id/delete' do
+  delete '/projects/:id/delete' do
     # if logged_in
     #   User.find(params[:id]).delete
     # end
-    redirect '/project/'
+    redirect '/projects'
   end
 
 end

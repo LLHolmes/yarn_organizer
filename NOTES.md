@@ -55,7 +55,8 @@ Once logged in, shows welcome with master index of things individual user can do
  - start a new project / add a new yarn/accessory
  - find my project/yarn/accessory
 
- How to send an error when login/signup not successful the first time
+ To Do:
+ Add yarn & accessories to new_project.erb / '/projects/new'
 
 
 Specifications for the Sinatra Assessment
