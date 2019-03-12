@@ -1,13 +1,13 @@
 <h3><%= @accessory.name %></h3>
 <p>Current Project: <%= @accessory.project.name %></p>
 
-<% if current_user == @project.user %>
-  <form action="/projects/<%= @project.id %>/edit" method="get">
-    <input type="submit" value="Update Project">
+<% if current_user == @accessory.user %>
+  <form action="/acessories/<%= @accessory.id %>/edit" method="get">
+    <input type="submit" value="Update Tool">
   </form>
 
-  <form action="/projects/<%= @project.id %>/delete" method="post">
+  <form action="/acessories/<%= @accessory.id %>/delete" method="post">
     <input id="hidden" type="hidden" name="_method" value="delete">
-    <input type="submit" value="Delete Project">
+    <input type="submit" value="Delete Tool">
   </form>
 <% end %>
