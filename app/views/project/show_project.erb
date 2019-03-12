@@ -1,1 +1,16 @@
-your new project
+<h1><%= @project.name %></h1>
+
+<p></p>
+
+<h1>THIS NEEDS TO BE FILLED IN!!!!!</h1>
+
+<p></p>
+
+<form action="/projects/<%= @project.id %>/edit" method="get">
+  <input type="submit" value="Update Project">
+</form>
+
+<form action="/projects/<%= @project.id %>/delete" method="post">
+  <input id="hidden" type="hidden" name="_method" value="delete">
+  <input type="submit" value="Delete Project">
+</form>

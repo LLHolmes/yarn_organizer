@@ -1,0 +1,31 @@
+<h3>Update Project:</h3>
+
+<h1>THIS NEEDS TO BE FILLED IN!!!!!</h1>
+
+  <form action="/projects/<%= @project.id %>" method="post">
+    <input id="hidden" type="hidden" name="_method" value="patch">
+    <label for="name">Name: </label><input type="text" name="name" value="<%= @project.name%>">
+    <% if @project.status == "In Progress" %>
+      <select name="status">
+        <option value="In Progress" selected> In Progress </option>
+        <option value="Upcoming"> Upcoming </option>
+        <option value="Finished"> Finished </option>
+      </select>
+    <% elsif @project.status == "Upcoming" %>
+      <select name="status">
+        <option value="In Progress"> In Progress </option>
+        <option value="Upcoming" selected> Upcoming </option>
+        <option value="Finished"> Finished </option>
+      </select>
+    <% else %>
+      <select name="status">
+        <option value="In Progress"> In Progress </option>
+        <option value="Upcoming"> Upcoming </option>
+        <option value="Finished" selected> Finished </option>
+      </select>
+    <% end %>
+    <br>
+    <label for="name">Pattern Information: </label><input type="text" name="pattern_info" value="<%= @project.pattern_info%>"><br>
+    <label for="name">Notes: </label><input type="text" name="notes" value="<%= @project.notes%>"><br>
+    <input type="submit" value="Update">
+  </form>

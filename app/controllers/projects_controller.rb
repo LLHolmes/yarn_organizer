@@ -30,26 +30,35 @@ class ProjectsController < ApplicationController
   end
 
   get '/projects/:id' do
-    # if logged_in?
-      erb :"project/show_project"
-    # else
-      # redirect '/projects/'
-    # end
+    @project = Project.find(params[:id])
+    erb :"project/show_project"
+  end
+
+  get '/projects/:id/edit' do
+    @project = Project.find(params[:id])
+    erb :"project/edit_project"
   end
 
   patch '/projects/:id' do
-    # user = User.find(params[:id])
-    # user.name = params[:name] unless params[:name] == ""
-    # user.email = params[:email] unless params[:email] == ""
-    # user.password = params[:password] unless params[:password] == ""
-    # user.save
-    redirect "/projects/:id"
+    @project = Project.find(params[:id])
+    if current_user = @project.user
+      params.delete('_method')
+      @project.update(params)
+      redirect "/projects/#{@project.id}"
+    end
+    flash.next[:error] = "You may not edit other crafter's projects."
+    redirect '/projects'
   end
 
   delete '/projects/:id/delete' do
-    # if logged_in
-    #   User.find(params[:id]).delete
-    # end
+    @project = Project.find(params[:id])
+    if current_user = @project.user
+      # yarn = @project.yarns
+      # yarn.project = @project.user.stash
+      @project.delete
+    else
+      flash.next[:error] = "You may not delete other crafter's projects."
+    end
     redirect '/projects'
   end
 
