@@ -1,19 +1,29 @@
-<h2>Add yarn to your stash:</h2>
+<h2>Add a new brand:</h2>
 <form action="/yarns/new" method="post">
-  <input type="text" name="name" placeholder="tool name">
-  <label for="project_id">Add to a project? </label>
-  <% current_user.projects.each do |project| %>
-    <input type="radio" name="project_id" value="<%= project.id %>"> <%= project.name %>
-  <% end %>
+  <input type="text" name="name" placeholder="Name"><br>
+  <label for="material">Select Material: </label>
+  <select name="material">
+    <option value="Acrylic" selected> Acrylic </option>
+    <option value="Cotton"> Cotton </option>
+    <option value="Wool"> Wool </option>
+    <option value="Specialty"> Specialty </option>
+  </select><br>
+  <label for="weight">Select Gauge: </label>
+  <select name="weight">
+    <option value="0"> 0 - Lace </option>
+    <option value="1"> 1 - Super Fine </option>
+    <option value="2"> 2 - Fine </option>
+    <option value="3"> 3 - Light </option>
+    <option value="4" selected> 4 - Medium </option>
+    <option value="5"> 5 - Bulky </option>
+    <option value="6"> 6 - Super Bulky </option>
+    <option value="7"> 7 - Jumbo </option>
+    <option value="Novelty"> Novelty </option>
+  </select><br>
+  <input type="text" name="skein_weight" placeholder="Skein weight"> oz<br>
+  <input type="text" name="skein_length" placeholder="Skein length"> yd<br>
+  <input type="text" name="hook" placeholder="Recommended hook size"><br>
+  <input type="text" name="needle" placeholder="Recommended needle size"><br>
   <br>
   <input type="submit" value="Add">
 </form>
-
-
-t.string "name"
-t.string "material"
-t.string "weight"
-t.string "hook"
-t.string "needle"
-t.integer "skein_weight"
-t.integer "skein_length"

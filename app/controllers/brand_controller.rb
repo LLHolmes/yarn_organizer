@@ -14,32 +14,32 @@ class BrandsController < ApplicationController
     erb :"brands/index_brands"
   end
 
-  # get '/accessories/new' do
-  #   erb :"accessories/new_accessory"
-  # end
-  #
-  # post '/accessories/new' do
-  #   if params[:name] == ""
-  #     flash.now[:warning] = "Please give your tool a name."
-  #     redirect '/accessories/new'
-  #   elsif Accessory.find_by_name(params[:name])
-  #     flash.now[:warning] = "You already have a tool with that name. Please choose another."
-  #     redirect '/accessories/new'
-  #   else
-  #     accessory = Accessory.new(params)
-  #     if params[:project_id] == ""
-  #       accessory.project = current_user.stash
-  #     else
-  #       accessory.project = Project.find(params[:project_id])
-  #     end
-  #     if accessory.save
-  #       redirect "/accessories/#{accessory.id}"
-  #     end
-  #   end
-  #   flash.now[:error] = "Something went wrong.  Please try again."
-  #   redirect '/accessories/new'
-  # end
-  #
+  get '/accessories/new' do
+    erb :"accessories/new_accessory"
+  end
+
+  post '/accessories/new' do
+    if params[:name] == "" || params[:status] == ""
+      flash.now[:warning] = "Please fill out all information."
+      redirect '/accessories/new'
+    elsif Accessory.find_by_name(params[:name])
+      flash.now[:warning] = "You already have a tool with that name. Please choose another."
+      redirect '/accessories/new'
+    else
+      accessory = Accessory.new(params)
+      if params[:project_id] == ""
+        accessory.project = current_user.stash
+      else
+        accessory.project = Project.find(params[:project_id])
+      end
+      if accessory.save
+        redirect "/accessories/#{accessory.id}"
+      end
+    end
+    flash.now[:error] = "Something went wrong.  Please try again."
+    redirect '/accessories/new'
+  end
+
   # get '/accessories/:id' do
   #   @accessory = Accessory.find(params[:id])
   #   if current_user == @accessory.project.user

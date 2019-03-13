@@ -23,7 +23,7 @@ class User < ActiveRecord::Base
   end
 
   def brands_sorted
-    self.brand.sort_by!{ |obj| obj.name }.sort_by! { |obj| obj.material }
+    self.brand.sort_by!{ |brand| brand.name }.sort_by! { |brand| brand.material }
   end
 
   def brand_by_weight(wt)
