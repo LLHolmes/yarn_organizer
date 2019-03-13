@@ -1,27 +1,27 @@
 <h2>Add yarn to your stash:</h2>
 <form action="/yarns/new" method="post">
 
-  <label for="color">Color: </label><input type="text" name="name"><br>
-  <label for="count">How much do you have? Full skeins: </label><input type="text" name="count">
-  <label for="scrap">Scraps: </label><input type="text" name="scrap"> oz<br>
+  <label for="yarn[color]">Color: </label><input type="text" name="yarn[color]"><br>
+  <label for="yarn[count]">How much do you have? Full skeins: </label><input type="text" name="yarn[count]">
+  <label for="yarn[scrap]">Scraps: </label><input type="text" name="yarn[scrap]"> oz<br>
 
 
-  <h3><label for="brand_id">Select a Brand: </label></h3>
+  <h3><label for="yarn[brand_id]">Select a Brand: </label></h3>
   <% current_user.brands.each do |brand| %>
-    <input type="radio" name="brand_id" value="<%= brand.id %>"> <%= brand.name %>
+    <input type="radio" name="yarn[brand_id]" value="<%= brand.id %>"> <%= brand.name %>
   <% end %>
 
     <h4>Create a new brand:</h4>
-    <label for="yarn[brand][name]">Brand Name: </label><input type="text" name="yarn[brand][name]"><br>
-    <label for="yarn[brand][material]">Select Material: </label>
-    <select name="yarn[brand][material]">
+    <label for="brand[name]">Brand Name: </label><input type="text" name="brand[name]"><br>
+    <label for="brand[material]">Select Material: </label>
+    <select name="brand[material]">
       <option value="Acrylic" selected> Acrylic </option>
       <option value="Cotton"> Cotton </option>
       <option value="Wool"> Wool </option>
       <option value="Specialty"> Specialty </option>
     </select><br>
-    <label for="yarn[brand][weight]">Select Gauge: </label>
-    <select name="yarn[brand][weight]">
+    <label for="brand[weight]">Select Gauge: </label>
+    <select name="brand[weight]">
       <option value="0"> 0 - Lace </option>
       <option value="1"> 1 - Super Fine </option>
       <option value="2"> 2 - Fine </option>
@@ -32,28 +32,29 @@
       <option value="7"> 7 - Jumbo </option>
       <option value="Novelty"> Novelty </option>
     </select><br>
-    <label for="yarn[brand][skein_weight]">Skein weight: </label><input type="text" name="skein_weight"> oz<br>
-    <label for="yarn[brand][skein_length]">Skein length: </label><input type="text" name="skein_length"> yd<br>
-    <label for="yarn[brand][hook]">Recommended crochet hook: </label><input type="text" name="hook"><br>
-    <label for="yarn[brand][needle]">Recommended knitting needle: </label><input type="text" name="needle"><br>
+    <label for="brand[skein_weight]">Skein weight: </label><input type="text" name="brand[skein_weight]"> oz<br>
+    <label for="brand[skein_length]">Skein length: </label><input type="text" name="brand[skein_length]"> yd<br>
+    <label for="brand[hook]">Recommended crochet hook: </label><input type="text" name="brand[hook]"><br>
+    <label for="brand[needle]">Recommended knitting needle: </label><input type="text" name="brand[needle]"><br>
 
 
-  <h3><label for="project_id">Add to a project? </label></h3>
+  <h3><label for="yarn[project_id]">Add to a project? </label></h3>
+  <p>* New yarn will default to your "Stash" project. *</p>
   <% current_user.projects.each do |project| %>
-    <input type="checkbox" name="project_id" value="<%= project.id %>"> <%= project.name %>
+    <input type="radio" name="yarn[project_id]" value="<%= project.id %>"> <%= project.name %>
   <% end %>
 
   <h4>Create a new project:</h4>
-    <label for="yarn[project][name]">Project Name: </label><input type="text" name="yarn[project][name]">
-    <label for="yarn[project][status]">Status: </label>
-    <select name="yarn[project][status]">
+    <label for="project[name]">Project Name: </label><input type="text" name="project[name]">
+    <label for="project[status]">Status: </label>
+    <select name="project[status]">
     	<option value="In Progress" selected> In Progress </option>
     	<option value="Upcoming"> Upcoming </option>
     	<option value="Finished"> Finished </option>
     </select>
     <br>
-    <label for="yarn[project][pattern_info]">Pattern information: </label><input type="text" name="pattern_info"><br>
-    <label for="yarn[project][notes]">Notes/Description: </label><input type="text" name="notes"><br>
+    <label for="project[pattern_info]">Pattern information: </label><input type="text" name="project[pattern_info]"><br>
+    <label for="project[notes]">Notes/Description: </label><input type="text" name="project[notes]"><br>
     <br>
 
   <input type="submit" value="Add Yarn">

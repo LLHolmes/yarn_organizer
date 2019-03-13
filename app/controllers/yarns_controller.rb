@@ -8,28 +8,46 @@ class YarnsController < ApplicationController
     erb :"yarns/new_yarn"
   end
 
-  # post '/accessories/new' do
-  #   if params[:name] == ""
-  #     flash.now[:warning] = "Please give your tool a name."
-  #     redirect '/accessories/new'
-  #   elsif Accessory.find_by_name(params[:name])
-  #     flash.now[:warning] = "You already have a tool with that name. Please choose another."
-  #     redirect '/accessories/new'
-  #   else
-  #     accessory = Accessory.new(params)
-  #     if params[:project_id] == ""
-  #       accessory.project = current_user.stash
-  #     else
-  #       accessory.project = Project.find(params[:project_id])
-  #     end
-  #     if accessory.save
-  #       redirect "/accessories/#{accessory.id}"
-  #     end
-  #   end
-  #   flash.now[:error] = "Something went wrong.  Please try again."
-  #   redirect '/accessories/new'
-  # end
-  #
+  post '/yarns/new' do
+    binding.pry
+    if params[:yarn][:color] == ""
+      flash.now[:warning] = "Please specify a yarn color."
+      redirect '/accessories/new'
+    elsif params[:yarn][:brand_id] == nil && params[:brand][:name] == ""
+      flash.now[:warning] = "Please specify a brand."
+      redirect '/accessories/new'
+
+
+    #   Accessory.find_by_name(params[:name])
+    #   flash.now[:warning] = "You already have a tool with that name. Please choose another."
+    #   redirect '/accessories/new'
+    # else
+    #   accessory = Accessory.new(params)
+    #   if params[:project_id] == ""
+    #     accessory.project = current_user.stash
+    #   else
+    #     accessory.project = Project.find(params[:project_id])
+    #   end
+    #   if accessory.save
+    #     redirect "/accessories/#{accessory.id}"
+    #   end
+    # end
+
+    @yarn = Yarn.new(params[:yarn])
+    if params[:yarn][:brand_id] == nil
+      @brand = Brand.create(params[:brand])
+      @yarn.brand = @brand
+    end
+    if params[:yarn][:project_id] == nil &&params[:project][:name] != ""
+      @project = Project.create(params[:project])
+      @yarn.project = @project
+    end
+    if @yarn.save
+      redirect "/yarns/#{@yarn.id}"
+    end
+
+  end
+
   # get '/accessories/:id' do
   #   @accessory = Accessory.find(params[:id])
   #   if current_user == @accessory.project.user
