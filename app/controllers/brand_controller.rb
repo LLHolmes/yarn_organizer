@@ -14,30 +14,25 @@ class BrandsController < ApplicationController
     erb :"brands/index_brands"
   end
 
-  get '/accessories/new' do
-    erb :"accessories/new_accessory"
+  get '/brands/new' do
+    erb :"brands/new_brand"
   end
 
-  post '/accessories/new' do
-    if params[:name] == "" || params[:status] == ""
+  post '/brands/new' do
+    if params[:name] == "" || params[:material] == "" || params[:weight] == ""
       flash.now[:warning] = "Please fill out all information."
-      redirect '/accessories/new'
-    elsif Accessory.find_by_name(params[:name])
-      flash.now[:warning] = "You already have a tool with that name. Please choose another."
-      redirect '/accessories/new'
+      redirect '/brands/new'
+    elsif Brand.find_by_name(params[:name])
+      flash.now[:warning] = "You already have a brand with that name. Please choose another."
+      redirect '/brands/new'
     else
-      accessory = Accessory.new(params)
-      if params[:project_id] == ""
-        accessory.project = current_user.stash
-      else
-        accessory.project = Project.find(params[:project_id])
-      end
-      if accessory.save
-        redirect "/accessories/#{accessory.id}"
+      brand = Brand.new(params)
+      if brand.save
+        redirect "/brands/#{brand.id}"
       end
     end
     flash.now[:error] = "Something went wrong.  Please try again."
-    redirect '/accessories/new'
+    redirect '/brands/new'
   end
 
   # get '/accessories/:id' do
