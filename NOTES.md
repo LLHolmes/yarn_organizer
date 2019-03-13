@@ -74,15 +74,44 @@ Specs:
 - [x] Include at least one belongs_to relationship on another model (e.g. Post belongs_to User)
     -- Many, but: Yarns belongs_to a Project and a Brand
 - [x] Include user accounts with unique login attribute (username or email)
-- [ ] Ensure that the belongs_to resource has routes for Creating, Reading, Updating and Destroying
-- [ ] Ensure that users can't modify content created by other users
-- [ ] Include user input validations
-- [ ] BONUS - not required - Display validation failures to user with error message (example form URL e.g. /posts/new)
+- [x] Ensure that the belongs_to resource has routes for Creating, Reading, Updating and Destroying
+- [x] Ensure that users can't modify content created by other users
+- [x] Include user input validations
+- [x] BONUS - not required - Display validation failures to user with error message (example form URL e.g. /posts/new)
 - [.] Your README.md includes a short description, install instructions, a contributors guide and a link to the license for your code
     -- Need to add Usage instructions!
 
 Confirm:
-- [ ] You have a large number of small Git commits
-- [ ] Your commit messages are meaningful
-- [ ] You made the changes in a commit that relate to the commit message
+- [x] You have a large number of small Git commits
+- [x] Your commit messages are meaningful
+- [x] You made the changes in a commit that relate to the commit message
 - [ ] You don't include changes in a commit that aren't related to the commit message
+
+
+<form action="/figures" method="POST">
+  <label>Name</label>
+    <input type="text" id="figure_name" name="figure[name]"><br></br>
+
+  <label><h4>Titles</h4></label>
+    <% Title.all.each do |title| %>
+      <label><%= title.name %></label>
+      <input type="checkbox" id="title_<%=title.id%>" name="figure[title_ids][]" value="<%= title.id %>"><br>
+
+    <% end %>
+ <label><h4>Create New Title:</h4></label>
+  <input type="text" id="new_title" name="title[name]">
+
+
+  <label><h4>Landmarks</h4></label>
+    <% Landmark.all.each do |landmark| %>
+      <label><%= landmark.name %></label>
+      <input type="checkbox" id="landmark_<%=landmark.id%>" name="figure[landmark_ids][]" value="<%= landmark.id %>"><br>
+
+    <% end %>
+ <label><h4>Create New Landmark:</h4></label>
+ <label>Name:</label>
+  <input type="text" id="new_landmark" name="landmark[name]">
+  <label>Year:</label>
+  <input type="text" name="landmark[year_completed]">
+  <input type="submit" value="Create New Figure">
+</form>

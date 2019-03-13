@@ -1,45 +1,18 @@
 <h2>Add yarn to your stash:</h2>
 <form action="/yarns/new" method="post">
-  <label for="name">Name: </label><input type="text" name="name" placeholder="tool name">
+  <label for="brand_id">Select Brand: </label>
+  <select name="brand_id">
+    <% current_user.brands.each do |brand| %>
+      <option value="<%= brand.id %>"> <%= brand.name %> </option>
+    <% end %>
+  </select>
+  <label for="color">Color: </label><input type="text" name="name"><br>
+  <label for="count">How much do you have? Full skeins: </label><input type="text" name="count">
+  <label for="scrap">Scraps: </label><input type="text" name="scrap"> oz<br>
   <label for="project_id">Add to a project? </label>
   <% current_user.projects.each do |project| %>
-    <input type="radio" name="project_id" value="<%= project.id %>"> <%= project.name %>
+    <input type="checkbox" name="project_id" value="<%= project.id %>"> <%= project.name %>
   <% end %>
   <br>
-  <input type="submit" value="Add">
-</form>
-
-
-t.string "color"
-t.integer "count"
-t.float "scrap"
-t.integer "project_id"
-t.integer "brand_id"
-
-<form action="/figures" method="POST">
-  <label>Name</label>
-    <input type="text" id="figure_name" name="figure[name]"><br></br>
-
-  <label><h4>Titles</h4></label>
-    <% Title.all.each do |title| %>
-      <label><%= title.name %></label>
-      <input type="checkbox" id="title_<%=title.id%>" name="figure[title_ids][]" value="<%= title.id %>"><br>
-
-    <% end %>
- <label><h4>Create New Title:</h4></label>
-  <input type="text" id="new_title" name="title[name]">
-
-
-  <label><h4>Landmarks</h4></label>
-    <% Landmark.all.each do |landmark| %>
-      <label><%= landmark.name %></label>
-      <input type="checkbox" id="landmark_<%=landmark.id%>" name="figure[landmark_ids][]" value="<%= landmark.id %>"><br>
-
-    <% end %>
- <label><h4>Create New Landmark:</h4></label>
- <label>Name:</label>
-  <input type="text" id="new_landmark" name="landmark[name]">
-  <label>Year:</label>
-  <input type="text" name="landmark[year_completed]">
-  <input type="submit" value="Create New Figure">
+  <input type="submit" value="Add Yarn">
 </form>

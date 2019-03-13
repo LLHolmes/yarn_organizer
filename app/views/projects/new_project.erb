@@ -10,5 +10,11 @@
   <br>
   <label for="pattern_info">Pattern information: </label><input type="text" name="pattern_info"><br>
   <label for="notes">Notes/Description: </label><input type="text" name="notes"><br>
-  <input type="submit" value="Add">
+
+  <label>Select Yarn</label>
+  <% current_user.yarns.each do |yarn| %>
+    <input type="checkbox" name="project[yarn_ids][]" value="<%= yarn.id %>"><%= yarn.brand.name %> - <%= yarn.color %><br>
+  <% end %>
+
+  <input type="submit" value="Create Project">
 </form>
