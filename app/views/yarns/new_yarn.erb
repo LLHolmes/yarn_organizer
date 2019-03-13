@@ -1,0 +1,10 @@
+<h2>Add a new tool:</h2>
+<form action="/accessories/new" method="post">
+  <input type="text" name="name" placeholder="tool name">
+  <label for="project_id">Add to a project? </label>
+  <% current_user.projects.each do |project| %>
+    <input type="radio" name="project_id" value="<%= project.id %>"> <%= project.name %>
+  <% end %>
+  <br>
+  <input type="submit" value="Add">
+</form>

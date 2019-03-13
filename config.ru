@@ -9,4 +9,5 @@ use Rack::MethodOverride
 use UsersController
 use ProjectsController
 use CcessoriesController
+use YarnsController
 run ApplicationController
