@@ -1,15 +1,14 @@
-<h1>NEW BRAND</h1>
+<h3><%= @brand.name %></h3>
+<p>Material: <%= @brand.material %></p>
+<p>Gauge: <%= @brand.weight %></p>
+<p>Skein size: <%= @brand.skein_weight %>oz, <%= @brand.skein_length %>yd</p>
+<p>Recommended Hook / Needle: <%= @brand.hook %>, <%= @brand.needle %></p>
 
-<h3><%= @accessory.name %></h3>
-<p>Current Project: <%= @accessory.project.name %></p>
+<form action="/brands/<%= @brand.id %>/edit" method="get">
+  <input type="submit" value="Update Brand">
+</form>
 
-<% if current_user == @accessory.project.user %>
-  <form action="/acessories/<%= @accessory.id %>/edit" method="get">
-    <input type="submit" value="Update Tool">
-  </form>
-
-  <form action="/accessories/<%= @accessory.id %>/delete" method="post">
-    <input id="hidden" type="hidden" name="_method" value="delete">
-    <input type="submit" value="Delete Tool">
-  </form>
-<% end %>
+<form action="/brands/<%= @brand.id %>/delete" method="post">
+  <input id="hidden" type="hidden" name="_method" value="delete">
+  <input type="submit" value="Delete Brand">
+</form>

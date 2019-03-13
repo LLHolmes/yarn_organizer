@@ -1,7 +1,6 @@
 class BrandsController < ApplicationController
 
   get '/brands' do
-    binding.pry
     @lace = current_user.brand_by_weight("0")
     @sock = current_user.brand_by_weight("1")
     @fine = current_user.brand_by_weight("2")
@@ -35,16 +34,17 @@ class BrandsController < ApplicationController
     redirect '/brands/new'
   end
 
-  # get '/accessories/:id' do
-  #   @accessory = Accessory.find(params[:id])
-  #   if current_user == @accessory.project.user
-  #     erb :"accessories/show_accessory"
-  #   else
-  #     flash.next[:unauthorized] = "You may not view other crafter's tools."
-  #     redirect '/accessories'
-  #   end
-  # end
-  #
+  get '/brands/:id' do
+    @brand = Brand.find(params[:id])
+    erb :"brands/show_brand"
+    # if current_user == @brand.project.user
+    #   erb :"brands/show_brand"
+    # else
+    #   flash.next[:unauthorized] = "You may not view other crafter's tools."
+    #   redirect '/accessories'
+    # end
+  end
+
   # get '/accessories/:id/edit' do
   #   @accessory = Accessory.find(params[:id])
   #   if current_user == @accessory.project.user
