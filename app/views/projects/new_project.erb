@@ -16,5 +16,10 @@
     <input type="checkbox" name="project[yarn_ids][]" value="<%= yarn.id %>"><%= yarn.brand.name %> - <%= yarn.color %><br>
   <% end %>
 
+  <label>Select Tools/Accessories</label>
+  <% current_user.accessories.each do |acc| %>
+    <input type="checkbox" name="project[accessory_ids][]" value="<%= acc.id %>"><%= acc.name %><br>
+  <% end %>
+
   <input type="submit" value="Create Project">
 </form>
