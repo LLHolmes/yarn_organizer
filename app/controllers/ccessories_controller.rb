@@ -10,7 +10,7 @@ class CcessoriesController < ApplicationController
 
   post '/accessories/new' do
     if params[:name] == ""
-      flash.now[:error] = "Please give your tool a name."
+      flash.now[:warning] = "Please give your tool a name."
       redirect '/accessories/new'
     elsif Accessory.find_by_name(params[:name])
       flash.now[:warning] = "You already have a tool with that name. Please choose another."
@@ -32,39 +32,43 @@ class CcessoriesController < ApplicationController
 
   get '/accessories/:id' do
     @accessory = Accessory.find(params[:id])
-    erb :"accessories/show_accessory"
+    if current_user == @accessory.project.user
+      erb :"accessories/show_accessory"
+    else
+      flash.next[:unauthorized] = "You may not view other crafter's tools."
+      redirect '/accessories'
+    end
   end
 
   get '/accessories/:id/edit' do
     @accessory = Accessory.find(params[:id])
-    if current_user == @accessory.user
+    if current_user == @accessory.project.user
       erb :"accessories/edit_accessory"
+    else
+      flash.next[:unauthorized] = "You may not edit other crafter's tools."
+      redirect '/accessories'
     end
-    flash.next[:error] = "You may not edit other crafter's tools."
-    redirect '/accessories'
   end
 
   patch '/accessories/:id' do
     @accessory = Accessory.find(params[:id])
-    if current_user == @accessory.user
+    if current_user == @accessory.project.user
       params.delete('_method')
       @accessory.update(params)
-      redirect "/accessories/#{@project.id}"
+      redirect "/accessories/#{@accessory.id}"
     end
-    flash.now[:error] = "You may not edit other crafter's projects."
+    flash.now[:unauthorized] = "You may not edit other crafter's projects."
     redirect '/accessories'
   end
 
-  # delete '/accessories/:id/delete' do
-  #   @accessory = Accessory.find(params[:id])
-  #   if current_user == @accessory.user
-  #     # yarn = @project.yarns
-  #     # yarn.project = @accessory.user.stash
-  #     @accessory.delete
-  #   else
-  #     flash.now[:error] = "You may not delete other crafter's projects."
-  #   end
-  #   redirect '/accessories'
-  # end
+  delete '/accessories/:id/delete' do
+    @accessory = Accessory.find(params[:id])
+    if current_user == @accessory.project.user
+      @accessory.delete
+    else
+      flash.now[:unauthorized] = "You may not delete other crafter's projects."
+    end
+    redirect '/accessories'
+  end
 
 end

@@ -13,7 +13,7 @@ class ProjectsController < ApplicationController
 
   post '/projects/new' do
     if params[:name] == "" || params[:status] == ""
-      flash.now[:error] = "A name and status are required to create a new project."
+      flash.now[:warning] = "A name and status are required to create a new project."
       redirect '/projects/new'
     elsif Project.find_by_name(params[:name])
       flash.now[:warning] = "You already have a project with that name. Please choose another."
@@ -39,7 +39,7 @@ class ProjectsController < ApplicationController
     if current_user == @project.user
       erb :"projects/edit_project"
     end
-    flash.next[:error] = "You may not edit other crafter's projects."
+    flash.next[:unauthorized] = "You may not edit other crafter's projects."
     redirect '/projects'
   end
 
@@ -50,7 +50,7 @@ class ProjectsController < ApplicationController
       @project.update(params)
       redirect "/projects/#{@project.id}"
     end
-    flash.now[:error] = "You may not edit other crafter's projects."
+    flash.now[:unauthorized] = "You may not edit other crafter's projects."
     redirect '/projects'
   end
 
@@ -61,7 +61,7 @@ class ProjectsController < ApplicationController
       # yarn.project = @project.user.stash
       @project.delete
     else
-      flash.now[:error] = "You may not delete other crafter's projects."
+      flash.now[:unauthorized] = "You may not delete other crafter's projects."
     end
     redirect '/projects'
   end

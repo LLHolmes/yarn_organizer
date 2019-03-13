@@ -6,6 +6,16 @@
 
 <p></p>
 
+<h4>Project Yarn:</h4>
+<% @project.accessories.each do |acc| %>
+  <p><a href="/accessories/<%= acc.id %>"></a><%= acc.name %></p>
+<% end %>
+
+<h4>Project Accessories:</h4>
+<% @project.accessories.each do |acc| %>
+  <p><a href="/accessories/<%= acc.id %>"></a><%= acc.name %></p>
+<% end %>
+
 <% if current_user == @project.user %>
   <form action="/projects/<%= @project.id %>/edit" method="get">
     <input type="submit" value="Update Project">
