@@ -22,4 +22,12 @@ class User < ActiveRecord::Base
     self.projects.detect { |project| project.name == "Stash" }
   end
 
+  def brands_sorted
+    self.brand.sort_by!{ |obj| obj.name }.sort_by! { |obj| obj.material }
+  end
+
+  def brand_by_weight(wt)
+    self.brands_sorted.select { |brand| brand.weight == wt }
+  end
+
 end

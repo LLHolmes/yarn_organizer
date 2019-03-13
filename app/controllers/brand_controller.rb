@@ -1,9 +1,19 @@
 class BrandsController < ApplicationController
 
-  # get '/accessories' do
-  #   erb :"accessories/index_accessories"
-  # end
-  #
+  get '/brands' do
+    binding.pry
+    @lace = current_user.brand_by_weight("0")
+    @sock = current_user.brand_by_weight("1")
+    @fine = current_user.brand_by_weight("2")
+    @light = current_user.brand_by_weight("3")
+    @medium = current_user.brand_by_weight("4")
+    @bulky = current_user.brand_by_weight("5")
+    @super_bulky = current_user.brand_by_weight("6")
+    @jumbo = current_user.brand_by_weight("7")
+    @novelty = current_user.brand_by_weight("Novelty")
+    erb :"brands/index_brands"
+  end
+
   # get '/accessories/new' do
   #   erb :"accessories/new_accessory"
   # end

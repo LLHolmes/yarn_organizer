@@ -1,34 +1,88 @@
-<h1>Your Accessories</h1>
+<h1>Your Yarn Brands</h1>
 
-<% current_user.yarns.each do |yarn| %>
-  <div>
-    <h3><%= yarn.brand.name %> - <%= yarn.color %></h3>
-    <p>Current Project: <%= yarn.project.name %></p>
+<% if !@lace.empty? %>
+  <h3>0 - Lace Weight:</h3>
+    <% @lace.each do |brand| %>
+      <div>
+        <a href="/brands/<%= brand.id %>"><%= brand.name %> - <%= brand.material %></a>
+      </div>
+    <% end %>
+<% end %>
 
-    <form action="/yarns/<%= yarn.id %>" method="post">
-      <input id="hidden" type="hidden" name="_method" value="patch">
+<% if !@sock.empty? %>
+  <h3>1 - Super Fine Weight:</h3>
+    <% @sock.each do |brand| %>
+      <div>
+        <a href="/brands/<%= brand.id %>"><%= brand.name %> - <%= brand.material %></a>
+      </div>
+    <% end %>
+<% end %>
 
-      <select name="project_id">
-        <% current_user.projects.each do |project| %>
-          <option value="<%= project.id %>"> <%= project.name %> </option>
-        <% end %>
-      </select>
-      <input type="submit" value="Update Project">
-    </form>
+<% if !@fine.empty? %>
+  <h3>2 - Fine Weight:</h3>
+    <% @fine.each do |brand| %>
+      <div>
+        <a href="/brands/<%= brand.id %>"><%= brand.name %> - <%= brand.material %></a>
+      </div>
+    <% end %>
+<% end %>
 
-    <form action="/yarns/<%= yarn.id %>/edit" method="get">
-      <input type="submit" value="Update Yarn">
-    </form>
+<% if !@light.empty? %>
+  <h3>3 - Light Weight:</h3>
+    <% @light.each do |brand| %>
+      <div>
+        <a href="/brands/<%= brand.id %>"><%= brand.name %> - <%= brand.material %></a>
+      </div>
+    <% end %>
+<% end %>
 
-    <form action="/accessories/<%= acc.id %>/delete" method="post">
-      <input id="hidden" type="hidden" name="_method" value="delete">
-      <input type="submit" value="Delete Yarn">
-    </form>
-  </div>
+<% if !@medium.empty? %>
+  <h3>4 - Medium Weight:</h3>
+    <% @medium.each do |brand| %>
+      <div>
+        <a href="/brands/<%= brand.id %>"><%= brand.name %> - <%= brand.material %></a>
+      </div>
+    <% end %>
+<% end %>
+
+<% if !@bulky.empty? %>
+  <h3>5 - Bulky Weight:</h3>
+    <% @bulky.each do |brand| %>
+      <div>
+        <a href="/brands/<%= brand.id %>"><%= brand.name %> - <%= brand.material %></a>
+      </div>
+    <% end %>
+<% end %>
+
+<% if !@super_bulky.empty? %>
+  <h3>6 - Super Bulky Weight:</h3>
+    <% @super_bulky.each do |brand| %>
+      <div>
+        <a href="/brands/<%= brand.id %>"><%= brand.name %> - <%= brand.material %></a>
+      </div>
+    <% end %>
+<% end %>
+
+<% if !@jumbo.empty? %>
+  <h3>7 - Jumbo Weight:</h3>
+    <% @jumbo.each do |brand| %>
+      <div>
+        <a href="/brands/<%= brand.id %>"><%= brand.name %> - <%= brand.material %></a>
+      </div>
+    <% end %>
+<% end %>
+
+<% if !@novelty.empty? %>
+  <h3>Novelty Yarn:</h3>
+    <% @novelty.each do |brand| %>
+      <div>
+        <a href="/brands/<%= brand.id %>"><%= brand.name %> - <%= brand.material %></a>
+      </div>
+    <% end %>
 <% end %>
 
 <br>
 
-<form action="/yarns/new" method="get">
-  <input type="submit" value="Add Yarn">
+<form action="/brands/new" method="get">
+  <input type="submit" value="Add a Yarn Brand">
 </form>
