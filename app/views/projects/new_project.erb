@@ -1,13 +1,14 @@
 <h2>Add a new project:</h2>
 <form action="/projects/new" method="post">
-  <input type="text" name="name" placeholder="Name">
+  <label for="name">Name: </label><input type="text" name="name">
+  <label for="status">Status: </label>
   <select name="status">
   	<option value="In Progress" selected> In Progress </option>
   	<option value="Upcoming"> Upcoming </option>
   	<option value="Finished"> Finished </option>
   </select>
   <br>
-  <input type="text" name="pattern_info" placeholder="Pattern information"><br>
-  <input type="text" name="notes" placeholder="Notes / Description"><br>
+  <label for="pattern_info">Pattern information: </label><input type="text" name="pattern_info"><br>
+  <label for="notes">Notes/Description: </label><input type="text" name="notes"><br>
   <input type="submit" value="Add">
 </form>

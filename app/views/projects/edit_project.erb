@@ -5,6 +5,7 @@
   <form action="/projects/<%= @project.id %>" method="post">
     <input id="hidden" type="hidden" name="_method" value="patch">
     <label for="name">Name: </label><input type="text" name="name" value="<%= @project.name%>">
+    <label for="status">Status: </label>
     <% if @project.status == "In Progress" %>
       <select name="status">
         <option value="In Progress" selected> In Progress </option>
@@ -26,6 +27,6 @@
     <% end %>
     <br>
     <label for="name">Pattern Information: </label><input type="text" name="pattern_info" value="<%= @project.pattern_info%>"><br>
-    <label for="name">Notes: </label><input type="text" name="notes" value="<%= @project.notes%>"><br>
+    <label for="name">Notes/Description: </label><input type="text" name="notes" value="<%= @project.notes%>"><br>
     <input type="submit" value="Update">
   </form>
