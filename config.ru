@@ -10,4 +10,5 @@ use UsersController
 use ProjectsController
 use CcessoriesController
 use YarnsController
+use BrandsController
 run ApplicationController

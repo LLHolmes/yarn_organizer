@@ -1,13 +1,13 @@
-class YarnsController < ApplicationController
+class BrandsController < ApplicationController
 
-  get '/yarns' do
-    erb :"yarns/index_yarns"
-  end
-
-  get '/yarns/new' do
-    erb :"yarns/new_yarn"
-  end
-
+  # get '/accessories' do
+  #   erb :"accessories/index_accessories"
+  # end
+  #
+  # get '/accessories/new' do
+  #   erb :"accessories/new_accessory"
+  # end
+  #
   # post '/accessories/new' do
   #   if params[:name] == ""
   #     flash.now[:warning] = "Please give your tool a name."

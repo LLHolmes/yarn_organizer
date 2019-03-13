@@ -1,0 +1,13 @@
+<h3>Update <%= @accessory.name %>:</h3>
+
+<form action="/accessories/<%= @accessory.id %>" method="post">
+  <input id="hidden" type="hidden" name="_method" value="patch">
+  <label for="name">Name: </label><input type="text" name="name" value="<%= @accessory.name %>">
+  <label for="project_id">Update Project: </label>
+  <select name="project_id">
+    <% current_user.projects.each do |project| %>
+      <option value="<%= project.id %>"> <%= project.name %> </option>
+    <% end %>
+  </select>
+  <input type="submit" value="Update">
+</form>
