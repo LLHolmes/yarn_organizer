@@ -51,35 +51,35 @@ class YarnsController < ApplicationController
     end
   end
 
-  # get '/accessories/:id/edit' do
-  #   @accessory = Accessory.find(params[:id])
-  #   if current_user == @accessory.project.user
-  #     erb :"accessories/edit_accessory"
-  #   else
-  #     flash.next[:unauthorized] = "You may not edit other crafter's tools."
-  #     redirect '/accessories'
-  #   end
-  # end
-  #
-  # patch '/accessories/:id' do
-  #   @accessory = Accessory.find(params[:id])
-  #   if current_user == @accessory.project.user
-  #     params.delete('_method')
-  #     @accessory.update(params)
-  #     redirect "/accessories/#{@accessory.id}"
-  #   end
-  #   flash.now[:unauthorized] = "You may not edit other crafter's projects."
-  #   redirect '/accessories'
-  # end
-  #
-  # delete '/accessories/:id/delete' do
-  #   @accessory = Accessory.find(params[:id])
-  #   if current_user == @accessory.project.user
-  #     @accessory.delete
-  #   else
-  #     flash.now[:unauthorized] = "You may not delete other crafter's projects."
-  #   end
-  #   redirect '/accessories'
-  # end
+  get '/yarns/:id/edit' do
+    @yarn = Yarn.find(params[:id])
+    if current_user == @yarn.project.user
+      erb :"yarns/edit_yarn"
+    else
+      flash.next[:unauthorized] = "You may not edit other crafter's yarn."
+      redirect '/yarns'
+    end
+  end
+
+  patch '/yarns/:id' do
+    @yarn = Yarn.find(params[:id])
+    if current_user == @yarn.project.user
+      params.delete('_method')
+      @yarn.update(params)
+      redirect "/yarns/#{@yarn.id}"
+    end
+    flash.now[:unauthorized] = "You may not edit other crafter's yarn."
+    redirect '/yarns'
+  end
+
+  delete '/yarns/:id/delete' do
+    @yarn = Yarn.find(params[:id])
+    if current_user == @yarn.project.user
+      @yarn.delete
+    else
+      flash.now[:unauthorized] = "You may not delete other crafter's yarn."
+    end
+    redirect '/yarns'
+  end
 
 end
