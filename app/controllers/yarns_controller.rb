@@ -32,12 +32,13 @@ class YarnsController < ApplicationController
         end
         @yarn.project = @project
       end
-      
+
       if @yarn.save
-        binding.pry
         redirect "/yarns/#{@yarn.id}"
       end
     end
+    flash.now[:error] = "Something went wrong.  Please try again."
+    redirect '/yarns/new'
   end
 
   get '/yarns/:id' do

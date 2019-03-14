@@ -36,44 +36,43 @@ class BrandsController < ApplicationController
 
   get '/brands/:id' do
     @brand = Brand.find(params[:id])
-    erb :"brands/show_brand"
-    # if current_user == @brand.project.user
-    #   erb :"brands/show_brand"
-    # else
-    #   flash.next[:unauthorized] = "You may not view other crafter's tools."
-    #   redirect '/accessories'
-    # end
+    if current_user.brands.include?(@brand)
+      erb :"brands/show_brand"
+    else
+      flash.next[:unauthorized] = "You may not view other crafter's brands."
+      redirect '/brands'
+    end
   end
 
-  # get '/accessories/:id/edit' do
-  #   @accessory = Accessory.find(params[:id])
-  #   if current_user == @accessory.project.user
-  #     erb :"accessories/edit_accessory"
-  #   else
-  #     flash.next[:unauthorized] = "You may not edit other crafter's tools."
-  #     redirect '/accessories'
-  #   end
-  # end
-  #
-  # patch '/accessories/:id' do
-  #   @accessory = Accessory.find(params[:id])
-  #   if current_user == @accessory.project.user
-  #     params.delete('_method')
-  #     @accessory.update(params)
-  #     redirect "/accessories/#{@accessory.id}"
-  #   end
-  #   flash.now[:unauthorized] = "You may not edit other crafter's projects."
-  #   redirect '/accessories'
-  # end
-  #
-  # delete '/accessories/:id/delete' do
-  #   @accessory = Accessory.find(params[:id])
-  #   if current_user == @accessory.project.user
-  #     @accessory.delete
-  #   else
-  #     flash.now[:unauthorized] = "You may not delete other crafter's projects."
-  #   end
-  #   redirect '/accessories'
-  # end
+  get '/brands/:id/edit' do
+    @brand = Brand.find(params[:id])
+    if current_user.brands.include?(@brand)
+      erb :"brands/edit_brand"
+    else
+      flash.next[:unauthorized] = "You may not edit other crafter's brands."
+      redirect '/brands'
+    end
+  end
+
+  patch '/brands/:id' do
+    @brand = Brand.find(params[:id])
+    if current_user.brands.include?(@brand)
+      params.delete('_method')
+      @brand.update(params)
+      redirect "/brands/#{@brand.id}"
+    end
+    flash.now[:unauthorized] = "You may not edit other crafter's brands."
+    redirect '/brand'
+  end
+
+  delete '/brands/:id/delete' do
+    @brand = Brand.find(params[:id])
+    if current_user.brands.include?(@brand)
+      @brand.delete
+    else
+      flash.now[:unauthorized] = "You may not delete other crafter's brands."
+    end
+    redirect '/brands'
+  end
 
 end

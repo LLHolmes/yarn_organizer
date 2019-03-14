@@ -23,16 +23,11 @@ class User < ActiveRecord::Base
   end
 
   def brands_sorted
-    self.brands
-    # .sort_by!{ |brand| brand.name }.sort_by! { |brand| brand.material }
+    self.brands.sort_by { |brand| brand.name }.sort_by { |brand| brand.material }
   end
 
   def brand_by_weight(wt)
     self.brands_sorted.select { |brand| brand.weight == wt }
   end
-
-  # def uniq_brands
-  #   self.brands.select
-  # end
 
 end
