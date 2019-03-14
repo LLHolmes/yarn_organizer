@@ -7,7 +7,7 @@
 
 
   <h3><label for="yarn[brand_id]">Select a Brand: </label></h3>
-  <% current_user.brands.each do |brand| %>
+  <% current_user.brands.uniq.each do |brand| %>
     <input type="radio" name="yarn[brand_id]" value="<%= brand.id %>"> <%= brand.name %>
   <% end %>
 
@@ -41,7 +41,7 @@
   <h3><label for="yarn[project_id]">Add to a project? </label></h3>
   <p>* New yarn will default to your "Stash" project. *</p>
   <% current_user.projects.each do |project| %>
-    <input type="radio" name="yarn[project_id]" value="<%= project.id %>"> <%= project.name %>
+    <input type="radio" name="yarn[project_id" value="<%= project.id %>"> <%= project.name %>
   <% end %>
 
   <h4>Create a new project:</h4>

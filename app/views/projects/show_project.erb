@@ -7,13 +7,13 @@
 <p></p>
 
 <h4>Project Yarn:</h4>
-<% @project.accessories.each do |acc| %>
-  <p><a href="/accessories/<%= acc.id %>"></a><%= acc.name %></p>
+<% @project.yarns.each do |yarn| %>
+  <p><a href="/brands/<%= yarn.brand.id %>"><%= yarn.brand.name %></a> - <a href="/yarns/<%= yarn.id %>"><%= yarn.color %></a></p>
 <% end %>
 
 <h4>Project Accessories:</h4>
 <% @project.accessories.each do |acc| %>
-  <p><a href="/accessories/<%= acc.id %>"></a><%= acc.name %></p>
+  <p><a href="/accessories/<%= acc.id %>"><%= acc.name %></a></p>
 <% end %>
 
 <% if current_user == @project.user %>

@@ -9,55 +9,47 @@ class YarnsController < ApplicationController
   end
 
   post '/yarns/new' do
-    binding.pry
     if params[:yarn][:color] == ""
       flash.now[:warning] = "Please specify a yarn color."
       redirect '/accessories/new'
     elsif params[:yarn][:brand_id] == nil && params[:brand][:name] == ""
       flash.now[:warning] = "Please specify a brand."
       redirect '/accessories/new'
+    else
+      @yarn = Yarn.new(params[:yarn])
+      if params[:yarn][:brand_id] == nil
+        @brand = Brand.create(params[:brand])
+        @yarn.brand = @brand
+      end
 
-
-    #   Accessory.find_by_name(params[:name])
-    #   flash.now[:warning] = "You already have a tool with that name. Please choose another."
-    #   redirect '/accessories/new'
-    # else
-    #   accessory = Accessory.new(params)
-    #   if params[:project_id] == ""
-    #     accessory.project = current_user.stash
-    #   else
-    #     accessory.project = Project.find(params[:project_id])
-    #   end
-    #   if accessory.save
-    #     redirect "/accessories/#{accessory.id}"
-    #   end
-    # end
-
-    @yarn = Yarn.new(params[:yarn])
-    if params[:yarn][:brand_id] == nil
-      @brand = Brand.create(params[:brand])
-      @yarn.brand = @brand
+      if params[:yarn][:project_id] == nil
+        if params[:project][:name] != ""
+          @project = Project.new(params[:project])
+          @project.user = current_user
+          @project.save
+        else
+          @project = current_user.stash
+        end
+        @yarn.project = @project
+      end
+      
+      if @yarn.save
+        binding.pry
+        redirect "/yarns/#{@yarn.id}"
+      end
     end
-    if params[:yarn][:project_id] == nil &&params[:project][:name] != ""
-      @project = Project.create(params[:project])
-      @yarn.project = @project
-    end
-    if @yarn.save
-      redirect "/yarns/#{@yarn.id}"
-    end
-
   end
 
-  # get '/accessories/:id' do
-  #   @accessory = Accessory.find(params[:id])
-  #   if current_user == @accessory.project.user
-  #     erb :"accessories/show_accessory"
-  #   else
-  #     flash.next[:unauthorized] = "You may not view other crafter's tools."
-  #     redirect '/accessories'
-  #   end
-  # end
-  #
+  get '/yarns/:id' do
+    @yarn = Yarn.find(params[:id])
+    if current_user == @yarn.project.user
+      erb :"yarns/show_yarn"
+    else
+      flash.next[:unauthorized] = "You may not view other crafter's tools."
+      redirect '/yarns'
+    end
+  end
+
   # get '/accessories/:id/edit' do
   #   @accessory = Accessory.find(params[:id])
   #   if current_user == @accessory.project.user

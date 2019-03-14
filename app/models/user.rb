@@ -31,4 +31,8 @@ class User < ActiveRecord::Base
     self.brands_sorted.select { |brand| brand.weight == wt }
   end
 
+  # def uniq_brands
+  #   self.brands.select
+  # end
+
 end
