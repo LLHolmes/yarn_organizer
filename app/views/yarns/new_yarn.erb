@@ -2,8 +2,9 @@
 <form action="/yarns/new" method="post">
 
   <label for="yarn[color]">Color: </label><input type="text" name="yarn[color]"><br>
-  <label for="yarn[count]">How much do you have? Full skeins: </label><input type="text" name="yarn[count]">
-  <label for="yarn[scrap]">Scraps: </label><input type="text" name="yarn[scrap]"> oz<br>
+  <label>How much do you have?</label>
+  <label for="yarn[count]">  Full skeins: </label><input type="text" name="yarn[count]">br
+  <label for="yarn[scrap]">  Scraps: </label><input type="text" name="yarn[scrap]"> oz.<br>
 
 
   <h3><label for="yarn[brand_id]">Select a Brand: </label></h3>
@@ -39,10 +40,10 @@
 
 
   <h3><label for="yarn[project_id]">Add to a project? </label></h3>
-  <p>* New yarn will default to your "Stash" project. *</p>
   <% current_user.projects.each do |project| %>
     <input type="radio" name="yarn[project_id]" value="<%= project.id %>"> <%= project.name %>
   <% end %>
+  <p>* New yarn will default to your "Stash" project. *</p>
 
   <h4>Create a new project:</h4>
     <label for="project[name]">Project Name: </label><input type="text" name="project[name]">

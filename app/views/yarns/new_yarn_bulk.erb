@@ -1,12 +1,10 @@
-<h2>Add multiple yarn colors of one brand:</h2>
-<form action="/yarns/new" method="post">
+<h2>Add multiple yarns to your stash:</h2>
+<p>Add up to 10 yarns to your stash at one time. However, you can only create one new brand of yarn and/or one new project at a time.</p>
+<p>* If no project is selected, new yarn will default to your "Stash" project. *</p>
 
-  <h3><label for="yarn[brand_id]">Select a Brand: </label></h3>
-  <% current_user.brands.uniq.each do |brand| %>
-    <input type="radio" name="yarn[brand_id]" value="<%= brand.id %>"> <%= brand.name %>
-  <% end %>
+<form action="/yarns/new_bulk" method="post">
 
-    <h4>Create a new brand:</h4>
+    <h3>Create a new brand:</h3>
     <label for="brand[name]">Brand Name: </label><input type="text" name="brand[name]"><br>
     <label for="brand[material]">Select Material: </label>
     <select name="brand[material]">
@@ -32,22 +30,89 @@
     <label for="brand[hook]">Recommended crochet hook: </label><input type="text" name="brand[hook]"><br>
     <label for="brand[needle]">Recommended knitting needle: </label><input type="text" name="brand[needle]"><br>
 
+    <h3>Create a new project:</h3>
+      <label for="project[name]">Project Name: </label><input type="text" name="project[name]">
+      <label for="project[status]">Status: </label>
+      <select name="project[status]">
+      	<option value="In Progress" selected> In Progress </option>
+      	<option value="Upcoming"> Upcoming </option>
+      	<option value="Finished"> Finished </option>
+      </select>
+      <br>
+      <label for="project[pattern_info]">Pattern information: </label><input type="text" name="project[pattern_info]"><br>
+      <label for="project[notes]">Notes/Description: </label><input type="text" name="project[notes]"><br>
+      <br>
 
-  <h3><label for="yarn[brand_id]">Select a Brand: </label></h3>
-  <% current_user.brands.uniq.each do |brand| %>
-    <input type="radio" name="yarn[brand_id]" value="<%= brand.id %>"> <%= brand.name %>
-  <% end %>
-  <label for="yarn[color][]">Color: </label><input type="text" name="yarn[color][]"><br>
-  <label for="yarn[count][]">How much do you have? Full skeins: </label><input type="text" name="yarn[count][]">
-  <label for="yarn[scrap][]">Scraps: </label><input type="text" name="yarn[scrap][]"> oz.<br>
+    <h3>Add new yarn to your stash:</h3>
+    <div>
+      <label for="yarn[brand_id][]">Select an existing brand: </label>
+        <select name="yarn[brand_id][]">
+          <% current_user.brands.each do |brand| %>
+            <option value="<%= brand.id %>"> <%= brand.name %> </option>
+          <% end %>
+        </select>
+      <input type="checkbox" name="brand_new[]" value="NEW"> Add to New Brand Above
 
-  <h3><label for="yarn[project_id][]">Add to a project? </label></h3>
-  <p>* New yarn will default to your "Stash" project. *</p>
-  <% current_user.projects.each do |project| %>
-    <input type="radio" name="yarn[project_id][]" value="<%= project.id %>"> <%= project.name %>
-  <% end %>
+      <label for="yarn[color][]">Color: </label><input type="text" name="yarn[color][]" required><br>
+      <label>How much do you have?</label>
+      <label for="yarn[count][]">  Full skeins: </label><input type="text" name="yarn[count][]"><br>
+      <label for="yarn[scrap][]">  Scraps: </label><input type="text" name="yarn[scrap][]"> oz.<br>
+
+      <label for="yarn[brand_id][]">Select an existing project: </label>
+        <select name="yarn[project_id][]">
+          <% current_user.projects.each do |project| %>
+            <option value="<%= project.id %>"> <%= project.name %> </option>
+          <% end %>
+        </select>
+      <input type="checkbox" name="project_new[]" value="NEW"> Add to New Project Above
+    </div>
+
+    <div>
+      <label for="yarn[brand_id][]">Select an existing brand: </label>
+        <select name="yarn[brand_id][]">
+          <% current_user.brands.each do |brand| %>
+            <option value="<%= brand.id %>"> <%= brand.name %> </option>
+          <% end %>
+        </select>
+      <input type="checkbox" name="brand_new[]" value="NEW"> Add to New Brand Above
+
+      <label for="yarn[color][]">Color: </label><input type="text" name="yarn[color][]" required><br>
+      <label>How much do you have?</label>
+      <label for="yarn[count][]">  Full skeins: </label><input type="text" name="yarn[count][]"><br>
+      <label for="yarn[scrap][]">  Scraps: </label><input type="text" name="yarn[scrap][]"> oz.<br>
+
+      <label for="yarn[brand_id][]">Select an existing project: </label>
+        <select name="yarn[project_id][]">
+          <% current_user.projects.each do |project| %>
+            <option value="<%= project.id %>"> <%= project.name %> </option>
+          <% end %>
+        </select>
+      <input type="checkbox" name="project_new[]" value="NEW"> Add to New Project Above
+    </div>
+
+    <div>
+      <label for="yarn[brand_id][]">Select an existing brand: </label>
+        <select name="yarn[brand_id][]">
+          <% current_user.brands.each do |brand| %>
+            <option value="<%= brand.id %>"> <%= brand.name %> </option>
+          <% end %>
+        </select>
+      <input type="checkbox" name="brand_new[]" value="NEW"> Add to New Brand Above
+
+      <label for="yarn[color][]">Color: </label><input type="text" name="yarn[color][]" required><br>
+      <label>How much do you have?</label>
+      <label for="yarn[count][]">  Full skeins: </label><input type="text" name="yarn[count][]"><br>
+      <label for="yarn[scrap][]">  Scraps: </label><input type="text" name="yarn[scrap][]"> oz.<br>
+
+      <label for="yarn[brand_id][]">Select an existing project: </label>
+        <select name="yarn[project_id][]">
+          <% current_user.projects.each do |project| %>
+            <option value="<%= project.id %>"> <%= project.name %> </option>
+          <% end %>
+        </select>
+      <input type="checkbox" name="project_new[]" value="NEW"> Add to New Project Above
+    </div>
 
 
-
-  <input type="submit" value="Add Yarn Colors">
+  <input type="submit" value="Add Yarn">
 </form>

@@ -41,6 +41,43 @@ class YarnsController < ApplicationController
     redirect '/yarns/new'
   end
 
+  get '/yarns/new_bulk' do
+    erb :"yarns/new_yarn_bulk"
+  end
+
+  post '/yarns/new_bulk' do
+    if params[:yarn][:color] == ""
+      flash.now[:warning] = "Please specify a yarn color."
+      redirect '/accessories/new'
+    elsif params[:yarn][:brand_id] == nil && params[:brand][:name] == ""
+      flash.now[:warning] = "Please specify a brand."
+      redirect '/accessories/new'
+    else
+      @yarn = Yarn.new(params[:yarn])
+      if params[:yarn][:brand_id] == nil
+        @brand = Brand.create(params[:brand])
+        @yarn.brand = @brand
+      end
+
+      if params[:yarn][:project_id] == nil
+        if params[:project][:name] != ""
+          @project = Project.new(params[:project])
+          @project.user = current_user
+          @project.save
+        else
+          @project = current_user.stash
+        end
+        @yarn.project = @project
+      end
+
+      if @yarn.save
+        redirect "/yarns/#{@yarn.id}"
+      end
+    end
+    flash.now[:error] = "Something went wrong.  Please try again."
+    redirect '/yarns/new'
+  end
+
   get '/yarns/:id' do
     @yarn = Yarn.find(params[:id])
     if current_user == @yarn.project.user

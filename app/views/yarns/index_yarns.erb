@@ -13,7 +13,7 @@
           <option value="<%= project.id %>"> <%= project.name %> </option>
         <% end %>
       </select>
-      <input type="submit" value="Add to Project">
+      <input type="submit" value="Switch Project">
     </form>
 
     <form action="/yarns/<%= yarn.id %>/edit" method="get">
@@ -33,5 +33,5 @@
   <input type="submit" value="Add a Yarn">
 </form>
 <form action="/yarns/new_bulk" method="get">
-  <input type="submit" value="Add Multiple Yarn Colors of One Brand">
+  <input type="submit" value="Add Multiple Yarns">
 </form>
