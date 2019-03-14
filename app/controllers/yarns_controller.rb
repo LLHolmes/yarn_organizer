@@ -46,36 +46,68 @@ class YarnsController < ApplicationController
   end
 
   post '/yarns/new_bulk' do
-    if params[:yarn][:color] == ""
-      flash.now[:warning] = "Please specify a yarn color."
-      redirect '/accessories/new'
-    elsif params[:yarn][:brand_id] == nil && params[:brand][:name] == ""
-      flash.now[:warning] = "Please specify a brand."
-      redirect '/accessories/new'
-    else
-      @yarn = Yarn.new(params[:yarn])
-      if params[:yarn][:brand_id] == nil
-        @brand = Brand.create(params[:brand])
-        @yarn.brand = @brand
-      end
+    if params[:brand][:name] != ""
+      @new_brand = Brand.create(params[:brand])
+    end
 
-      if params[:yarn][:project_id] == nil
-        if params[:project][:name] != ""
-          @project = Project.new(params[:project])
-          @project.user = current_user
-          @project.save
-        else
-          @project = current_user.stash
-        end
-        @yarn.project = @project
-      end
-
-      if @yarn.save
-        redirect "/yarns/#{@yarn.id}"
+    if params[:project][:name] != "" || params[:project][:pattern_info] != "" || params[:project][:notes] != ""
+      if params[:project][:name] == ""
+        flash.now[:warning] = "Your project was not saved. All projects need names."
+      else
+        @new_project = Project.new(params[:project])
+        @new_project.user = current_user
+        @new_project.save
       end
     end
-    flash.now[:error] = "Something went wrong.  Please try again."
-    redirect '/yarns/new'
+
+    params[:yarn].each do |yarn_data|
+      # binding.pry
+      if !yarn_data[:color].empty?
+        yarn = Yarn.new(yarn_data)
+        if yarn_data[:brand_id].empty?
+          yarn.brand = @new_brand
+        end
+        if yarn_data[:project_id].empty?
+          yarn.project = @new_project
+        end
+        yarn.save
+      elsif !yarn_data[:brand_id].empty? || !yarn_data[:count].empty?
+        flash.now[:warning] = "Please specify a yarn color."
+        redirect '/yarns/new_bulk'
+      end
+    end
+    redirect "/yarns"
+
+
+    # if params[:yarn][:color] == ""
+    #   flash.now[:warning] = "Please specify a yarn color."
+    #   redirect '/accessories/new'
+    # elsif params[:yarn][:brand_id] == nil && params[:brand][:name] == ""
+    #   flash.now[:warning] = "Please specify a brand."
+    #   redirect '/accessories/new'
+    # else
+    #   @yarn = Yarn.new(params[:yarn])
+    #   if params[:yarn][:brand_id] == nil
+    #     @brand = Brand.create(params[:brand])
+    #     @yarn.brand = @brand
+    #   end
+
+      # if params[:yarn][:project_id] == nil
+      #   if params[:project][:name] != ""
+      #     @project = Project.new(params[:project])
+      #     @project.user = current_user
+      #     @project.save
+      #   else
+      #     @project = current_user.stash
+      #   end
+      #   @yarn.project = @project
+      # end
+
+
+
+
+    # flash.now[:error] = "Something went wrong.  Please try again."
+    # redirect '/yarns/new_bulk'
   end
 
   get '/yarns/:id' do

@@ -15,7 +15,11 @@
 
   <p>Select Yarn:</p>
   <% current_user.yarns.each do |yarn| %>
-    <input type="checkbox" name="yarns[ids]][]" value="<%= yarn.id %>"><%= yarn.brand.name %> - <%= yarn.color %>  ~  Current Project: <%= yarn.project.name %><br>
+    <% if yarn.project.name == "Stash" %>
+      <input type="checkbox" name="yarns[ids][]" value="<%= yarn.id %>"><%= yarn.brand.name %> - <%= yarn.color %><br>
+    <% else %>
+      <input type="checkbox" name="yarns[ids][]" value="<%= yarn.id %>"><%= yarn.brand.name %> - <%= yarn.color %>  ~  Current Project: <%= yarn.project.name %><br>
+    <% end %>
   <% end %>
 
   <p>Select Tools/Accessories:</p>
