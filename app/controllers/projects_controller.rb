@@ -12,15 +12,29 @@ class ProjectsController < ApplicationController
   end
 
   post '/projects/new' do
-    if params[:name] == "" || params[:status] == ""
-      flash.now[:warning] = "A name and status are required to create a new project."
-      redirect '/projects/new'
-    elsif Project.find_by_name(params[:name])
+    binding.pry
+    if Project.find_by_name(params[:project][:name])
       flash.now[:warning] = "You already have a project with that name. Please choose another."
       redirect '/projects/new'
     else
-      project = Project.new(params)
-      project.user = current_user
+      @project = Project.new(params[:project])
+      @project.user = current_user
+      if !!params[:yarns][:ids]
+        yarns = params[:yarns][:ids]
+        yarns.each do |ids|
+          yarn = Yarn.find(ids)
+          yarn.project = @project
+          yarn.save
+        end
+      end
+      if !!params[:accessories][:ids]
+        accs = params[:accessories][:ids]
+        accs.each do |ids|
+          accessory = Accessory.find(ids)
+          accessory.project = @project
+          accessory.save
+        end
+      end
       if project.save
         redirect "/projects/#{project.id}"
       end
@@ -36,32 +50,53 @@ class ProjectsController < ApplicationController
 
   get '/projects/:id/edit' do
     @project = Project.find(params[:id])
-    if current_user == @project.user
-      erb :"projects/edit_project"
+    if current_user != @project.user
+      flash.next[:unauthorized] = "You may not edit other crafter's projects."
+      redirect '/projects'
     end
-    flash.next[:unauthorized] = "You may not edit other crafter's projects."
-    redirect '/projects'
+    erb :"projects/edit_project"
   end
 
   patch '/projects/:id' do
     @project = Project.find(params[:id])
-    if current_user == @project.user
-      params.delete('_method')
-      @project.update(params)
+    if current_user != @project.user
+      flash.now[:unauthorized] = "You may not edit other crafter's projects."
+      redirect '/projects'
+    end
+
+    @project.update(params[:project])
+    if !!params[:yarns][:ids]
+      yarns = params[:yarns][:ids]
+      yarns.each do |ids|
+        yarn = Yarn.find(ids)
+        yarn.project = @project
+        yarn.save
+      end
+    end
+    if !!params[:accessories][:ids]
+      accs = params[:accessories][:ids]
+      accs.each do |ids|
+        accessory = Accessory.find(ids)
+        accessory.project = @project
+        accessory.save
+      end
+    end
+    if @project.save
       redirect "/projects/#{@project.id}"
     end
-    flash.now[:unauthorized] = "You may not edit other crafter's projects."
-    redirect '/projects'
+
+    flash.now[:error] = "Something went wrong.  Please try again."
+    redirect '/projects/new'
   end
 
   delete '/projects/:id/delete' do
     @project = Project.find(params[:id])
-    if current_user == @project.user
-      # yarn = @project.yarns
-      # yarn.project = @project.user.stash
-      @project.delete
-    else
+    if current_user != @project.user
       flash.now[:unauthorized] = "You may not delete other crafter's projects."
+    else
+      yarn = @project.yarns
+      yarn.project = current_user.stash
+      @project.delete
     end
     redirect '/projects'
   end

@@ -1,12 +1,12 @@
 <% if logged_in? %>
-<p>Welcome, <%= current_user.name %>!</p>
-<p>You are currently logged in.</p>
+  <p>Welcome, <%= current_user.name %>!</p>
+  <p>You are currently logged in.</p>
 <% else %>
-<h1>Welcome, Crafter!</h1>
+  <h1>Welcome, Crafter!</h1>
   <form action="/signup" method="post">
-    <label for="name">Name: </label><input type="text" name="name"><br>
-    <label for="email">Email: </label><input type="text" name="email"><br>
-    <label for="password">Password: </label><input type="password" name="password"><br>
+    <label for="name">Name: </label><input type="text" name="name" required><br>
+    <label for="email">Email: </label><input type="text" name="email" required><br>
+    <label for="password">Password: </label><input type="password" name="password" required><br>
     <input type="submit" value="Join">
   </form>
 <% end %>

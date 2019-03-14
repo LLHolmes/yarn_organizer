@@ -1,25 +1,29 @@
 <h2>Add a new project:</h2>
+
 <form action="/projects/new" method="post">
-  <label for="name">Name: </label><input type="text" name="name">
-  <label for="status">Status: </label>
-  <select name="status">
+  <label for="project[name]">Name: </label><input type="text" name="project[name]" required>
+  <label for="project[status]">Status: </label>
+  <select name="project[status]">
   	<option value="In Progress" selected> In Progress </option>
   	<option value="Upcoming"> Upcoming </option>
   	<option value="Finished"> Finished </option>
   </select>
   <br>
-  <label for="pattern_info">Pattern information: </label><input type="text" name="pattern_info"><br>
-  <label for="notes">Notes/Description: </label><input type="text" name="notes"><br>
+  <label for="project[pattern_info]">Pattern information: </label><input type="text" name="project[pattern_info]"><br>
+  <label for="project[notes]">Notes/Description: </label><br>
+  <textarea rows="5" name="project[notes]"></textarea><br>
 
-  <label>Select Yarn</label>
+  <p>Select Yarn:</p>
   <% current_user.yarns.each do |yarn| %>
-    <input type="checkbox" name="project[yarn_ids][]" value="<%= yarn.id %>"><%= yarn.brand.name %> - <%= yarn.color %><br>
+    <input type="checkbox" name="yarns[ids]][]" value="<%= yarn.id %>"><%= yarn.brand.name %> - <%= yarn.color %>  ~  Current Project: <%= yarn.project.name %><br>
   <% end %>
 
-  <label>Select Tools/Accessories</label>
+  <p>Select Tools/Accessories:</p>
   <% current_user.accessories.each do |acc| %>
-    <input type="checkbox" name="project[accessory_ids][]" value="<%= acc.id %>"><%= acc.name %><br>
+    <input type="checkbox" name="accessories[ids][]" value="<%= acc.id %>"><%= acc.name %>  ~  Current Project: <%= acc.project.name %><br>
   <% end %>
+
+  <br>
 
   <input type="submit" value="Create Project">
 </form>
