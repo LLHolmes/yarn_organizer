@@ -36,6 +36,7 @@ class BrandsController < ApplicationController
 
   get '/brands/:id' do
     @brand = Brand.find(params[:id])
+    @brand_yarns = current_user.brand_yarns(@brand)
     if current_user.brands.include?(@brand)
       erb :"brands/show_brand"
     else

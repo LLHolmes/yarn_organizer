@@ -30,4 +30,8 @@ class User < ActiveRecord::Base
     self.brands_sorted.select { |brand| brand.weight == wt }
   end
 
+  def brand_yarns(given_brand)
+    self.yarns.select { |yarn| yarn.brand == given_brand }
+  end
+
 end
