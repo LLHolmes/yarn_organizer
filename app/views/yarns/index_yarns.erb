@@ -2,7 +2,7 @@
 
 <% current_user.yarns.each do |yarn| %>
   <div>
-    <h3><%= yarn.brand.name %> - <%= yarn.color %></h3>
+    <h3><a href="/brands/<%= yarn.brand.id %>"><%= yarn.brand.name %></a> - <a href="/yarns/<%= yarn.id %>"><%= yarn.color %></a></h3>
     <p>Current Project: <%= yarn.project.name %></p>
 
     <form action="/yarns/<%= yarn.id %>" method="post">
