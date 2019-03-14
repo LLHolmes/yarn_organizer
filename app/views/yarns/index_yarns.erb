@@ -3,7 +3,7 @@
 <% current_user.yarns.each do |yarn| %>
   <div>
     <h3><a href="/brands/<%= yarn.brand.id %>"><%= yarn.brand.name %></a> - <a href="/yarns/<%= yarn.id %>"><%= yarn.color %></a></h3>
-    <p>Current Project: <%= yarn.project.name %></p>
+    <p>Current Project: <a href="/projects/<%= yarn.project.id %>"><%= yarn.project.name %></p>
 
     <form action="/yarns/<%= yarn.id %>" method="post">
       <input id="hidden" type="hidden" name="_method" value="patch">
@@ -13,7 +13,7 @@
           <option value="<%= project.id %>"> <%= project.name %> </option>
         <% end %>
       </select>
-      <input type="submit" value="Update Project">
+      <input type="submit" value="Add to Project">
     </form>
 
     <form action="/yarns/<%= yarn.id %>/edit" method="get">
@@ -30,5 +30,8 @@
 <br>
 
 <form action="/yarns/new" method="get">
-  <input type="submit" value="Add Yarn">
+  <input type="submit" value="Add a Yarn">
+</form>
+<form action="/yarns/new_bulk" method="get">
+  <input type="submit" value="Add Multiple Yarn Colors of One Brand">
 </form>

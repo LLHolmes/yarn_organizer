@@ -1,10 +1,5 @@
-<h2>Add yarn to your stash:</h2>
+<h2>Add multiple yarn colors of one brand:</h2>
 <form action="/yarns/new" method="post">
-
-  <label for="yarn[color]">Color: </label><input type="text" name="yarn[color]"><br>
-  <label for="yarn[count]">How much do you have? Full skeins: </label><input type="text" name="yarn[count]">
-  <label for="yarn[scrap]">Scraps: </label><input type="text" name="yarn[scrap]"> oz<br>
-
 
   <h3><label for="yarn[brand_id]">Select a Brand: </label></h3>
   <% current_user.brands.uniq.each do |brand| %>
@@ -38,24 +33,21 @@
     <label for="brand[needle]">Recommended knitting needle: </label><input type="text" name="brand[needle]"><br>
 
 
-  <h3><label for="yarn[project_id]">Add to a project? </label></h3>
+  <h3><label for="yarn[brand_id]">Select a Brand: </label></h3>
+  <% current_user.brands.uniq.each do |brand| %>
+    <input type="radio" name="yarn[brand_id]" value="<%= brand.id %>"> <%= brand.name %>
+  <% end %>
+  <label for="yarn[color][]">Color: </label><input type="text" name="yarn[color][]"><br>
+  <label for="yarn[count][]">How much do you have? Full skeins: </label><input type="text" name="yarn[count][]">
+  <label for="yarn[scrap][]">Scraps: </label><input type="text" name="yarn[scrap][]"> oz.<br>
+
+  <h3><label for="yarn[project_id][]">Add to a project? </label></h3>
   <p>* New yarn will default to your "Stash" project. *</p>
   <% current_user.projects.each do |project| %>
-    <input type="radio" name="yarn[project_id]" value="<%= project.id %>"> <%= project.name %>
+    <input type="radio" name="yarn[project_id][]" value="<%= project.id %>"> <%= project.name %>
   <% end %>
 
-  <h4>Create a new project:</h4>
-    <label for="project[name]">Project Name: </label><input type="text" name="project[name]">
-    <label for="project[status]">Status: </label>
-    <select name="project[status]">
-    	<option value="In Progress" selected> In Progress </option>
-    	<option value="Upcoming"> Upcoming </option>
-    	<option value="Finished"> Finished </option>
-    </select>
-    <br>
-    <label for="project[pattern_info]">Pattern information: </label><input type="text" name="project[pattern_info]"><br>
-    <label for="project[notes]">Notes/Description: </label><input type="text" name="project[notes]"><br>
-    <br>
 
-  <input type="submit" value="Add Yarn">
+
+  <input type="submit" value="Add Yarn Colors">
 </form>

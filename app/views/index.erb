@@ -1,19 +1,19 @@
 <h2>How can we help you get organized today?</h2>
-<h3>Your Projects:</h3>
+<h3><a href="/projects">Your Projects:</h3>
 <ul>
   <% current_user.projects.each do |wip| %>
   <li><a href="/projects/<%= wip.id %>"><%= wip.name %></a></li>
   <% end %>
 </ul>
 
-<h3>Your Yarn:</h3>
+<h3><a href="/yarns">Your Yarn:</h3>
 <ul>
-  <% current_user.yarns.each do |item| %>
-  <li><a href="/brands/<%= item.brand.id %>"><%= item.brand.name %></a> - <a href="/yarns/<%= item.id %>"><%= item.color %></a></li>
+  <% current_user.yarns.each do |yarn| %>
+  <li><a href="/brands/<%= yarn.brand.id %>"><%= yarn.brand.name %></a> - <a href="/yarns/<%= yarn.id %>"><%= yarn.color %></a></li>
   <% end %>
 </ul>
 
-<h3>Your Accessories:</h3>
+<h3><a href="/accessories">Your Accessories:</h3>
 <ul>
   <% current_user.accessories.each do |item| %>
   <li><a href="/accessories/<%= item.id %>"><%= item.name %></a></li>

@@ -2,7 +2,7 @@
 
 FlatIron School - Sinatra Final Project
 
-Welcome to Yarn Organizer, a ruby gem designed to help you wrangle your yarn stash and crafty projects.
+Welcome to Yarn Organizer, a Sinatra application designed to help you wrangle your yarn stash and crafty projects.
 
 ## Installation
 

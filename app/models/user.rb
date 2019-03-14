@@ -1,8 +1,8 @@
 class User < ActiveRecord::Base
   has_many :projects
-  has_many :yarns, through: :projects
-  has_many :brands, through: :yarns
-  has_many :accessories, through: :projects
+  has_many :yarns, -> { distinct }, through: :projects
+  has_many :brands, -> { distinct }, through: :yarns
+  has_many :accessories, -> { distinct }, through: :projects
 
   has_secure_password
 
