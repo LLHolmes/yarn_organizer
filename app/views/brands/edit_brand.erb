@@ -1,29 +1,155 @@
 <h2>Update Brand Information:</h2>
 
-  <form action="/projects/<%= @project.id %>" method="post">
+  <form action="/brands/<%= @brand.id %>" method="post">
     <input id="hidden" type="hidden" name="_method" value="patch">
-    <label for="name">Name: </label><input type="text" name="name" value="<%= @project.name%>">
-    <% if @project.status == "In Progress" %>
-      <select name="status">
-        <option value="In Progress" selected> In Progress </option>
-        <option value="Upcoming"> Upcoming </option>
-        <option value="Finished"> Finished </option>
-      </select>
-    <% elsif @project.status == "Upcoming" %>
-      <select name="status">
-        <option value="In Progress"> In Progress </option>
-        <option value="Upcoming" selected> Upcoming </option>
-        <option value="Finished"> Finished </option>
-      </select>
-    <% else %>
-      <select name="status">
-        <option value="In Progress"> In Progress </option>
-        <option value="Upcoming"> Upcoming </option>
-        <option value="Finished" selected> Finished </option>
-      </select>
-    <% end %>
+    <label for="name">Name: </label><input type="text" name="name" value="<%= @brand.name %>"><br>
+    <label for="material">Select Material: </label>
+      <% if @brand.material == "Acrylic" %>
+        <select name="material">
+          <option value="Acrylic" selected> Acrylic </option>
+          <option value="Cotton"> Cotton </option>
+          <option value="Wool"> Wool </option>
+          <option value="Specialty"> Specialty </option>
+        </select><br>
+      <% elsif @brand.material == "Cotton" %>
+        <select name="material">
+          <option value="Acrylic"> Acrylic </option>
+          <option value="Cotton" selected> Cotton </option>
+          <option value="Wool"> Wool </option>
+          <option value="Specialty"> Specialty </option>
+        </select><br>
+      <% elsif @brand.material == "Wool" %>
+        <select name="material">
+          <option value="Acrylic"> Acrylic </option>
+          <option value="Cotton"> Cotton </option>
+          <option value="Wool" selected> Wool </option>
+          <option value="Specialty"> Specialty </option>
+        </select><br>
+      <% else %>
+        <select name="material">
+          <option value="Acrylic"> Acrylic </option>
+          <option value="Cotton"> Cotton </option>
+          <option value="Wool"> Wool </option>
+          <option value="Specialty" selected> Specialty </option>
+        </select><br>
+      <% end %>
+
+    <label for="weight">Select Gauge: </label>
+      <% if @brand.weight == "0" %>
+        <select name="weight">
+          <option value="0" selected> 0 - Lace </option>
+          <option value="1"> 1 - Super Fine </option>
+          <option value="2"> 2 - Fine </option>
+          <option value="3"> 3 - Light </option>
+          <option value="4"> 4 - Medium </option>
+          <option value="5"> 5 - Bulky </option>
+          <option value="6"> 6 - Super Bulky </option>
+          <option value="7"> 7 - Jumbo </option>
+          <option value="Novelty"> Novelty </option>
+        </select><br>
+      <% elsif @brand.weight == "1" %>
+        <select name="weight">
+          <option value="0"> 0 - Lace </option>
+          <option value="1" selected> 1 - Super Fine </option>
+          <option value="2"> 2 - Fine </option>
+          <option value="3"> 3 - Light </option>
+          <option value="4"> 4 - Medium </option>
+          <option value="5"> 5 - Bulky </option>
+          <option value="6"> 6 - Super Bulky </option>
+          <option value="7"> 7 - Jumbo </option>
+          <option value="Novelty"> Novelty </option>
+        </select><br>
+      <% elsif @brand.weight == "2" %>
+        <select name="weight">
+          <option value="0"> 0 - Lace </option>
+          <option value="1"> 1 - Super Fine </option>
+          <option value="2" selected> 2 - Fine </option>
+          <option value="3"> 3 - Light </option>
+          <option value="4"> 4 - Medium </option>
+          <option value="5"> 5 - Bulky </option>
+          <option value="6"> 6 - Super Bulky </option>
+          <option value="7"> 7 - Jumbo </option>
+          <option value="Novelty"> Novelty </option>
+        </select><br>
+      <% elsif @brand.weight == "3" %>
+        <select name="weight">
+          <option value="0"> 0 - Lace </option>
+          <option value="1"> 1 - Super Fine </option>
+          <option value="2"> 2 - Fine </option>
+          <option value="3" selected> 3 - Light </option>
+          <option value="4"> 4 - Medium </option>
+          <option value="5"> 5 - Bulky </option>
+          <option value="6"> 6 - Super Bulky </option>
+          <option value="7"> 7 - Jumbo </option>
+          <option value="Novelty"> Novelty </option>
+        </select><br>
+      <% elsif @brand.weight == "4" %>
+        <select name="weight">
+          <option value="0"> 0 - Lace </option>
+          <option value="1"> 1 - Super Fine </option>
+          <option value="2"> 2 - Fine </option>
+          <option value="3"> 3 - Light </option>
+          <option value="4" selected> 4 - Medium </option>
+          <option value="5"> 5 - Bulky </option>
+          <option value="6"> 6 - Super Bulky </option>
+          <option value="7"> 7 - Jumbo </option>
+          <option value="Novelty"> Novelty </option>
+        </select><br>
+      <% elsif @brand.weight == "5" %>
+        <select name="weight">
+          <option value="0"> 0 - Lace </option>
+          <option value="1"> 1 - Super Fine </option>
+          <option value="2"> 2 - Fine </option>
+          <option value="3"> 3 - Light </option>
+          <option value="4"> 4 - Medium </option>
+          <option value="5" selected> 5 - Bulky </option>
+          <option value="6"> 6 - Super Bulky </option>
+          <option value="7"> 7 - Jumbo </option>
+          <option value="Novelty"> Novelty </option>
+        </select><br>
+      <% elsif @brand.weight == "6" %>
+        <select name="weight">
+          <option value="0"> 0 - Lace </option>
+          <option value="1"> 1 - Super Fine </option>
+          <option value="2"> 2 - Fine </option>
+          <option value="3"> 3 - Light </option>
+          <option value="4"> 4 - Medium </option>
+          <option value="5"> 5 - Bulky </option>
+          <option value="6" selected> 6 - Super Bulky </option>
+          <option value="7"> 7 - Jumbo </option>
+          <option value="Novelty"> Novelty </option>
+        </select><br>
+      <% elsif @brand.weight == "7" %>
+        <select name="weight">
+          <option value="0"> 0 - Lace </option>
+          <option value="1"> 1 - Super Fine </option>
+          <option value="2"> 2 - Fine </option>
+          <option value="3"> 3 - Light </option>
+          <option value="4"> 4 - Medium </option>
+          <option value="5"> 5 - Bulky </option>
+          <option value="6"> 6 - Super Bulky </option>
+          <option value="7" selected> 7 - Jumbo </option>
+          <option value="Novelty"> Novelty </option>
+        </select><br>
+      <% else %>
+        <select name="weight">
+          <option value="0"> 0 - Lace </option>
+          <option value="1"> 1 - Super Fine </option>
+          <option value="2"> 2 - Fine </option>
+          <option value="3"> 3 - Light </option>
+          <option value="4"> 4 - Medium </option>
+          <option value="5"> 5 - Bulky </option>
+          <option value="6"> 6 - Super Bulky </option>
+          <option value="7"> 7 - Jumbo </option>
+          <option value="Novelty" selected> Novelty </option>
+        </select><br>
+      <% end %>
+
+    <label for="skein_weight">Skein weight: </label><input type="text" name="skein_weight" value="<%= @brand.skein_weight %>"> oz.<br>
+    <label for="skein_length">Skein length: </label><input type="text" name="skein_length" value="<%= @brand.skein_length %>"> yd.<br>
+    <label for="hook">Recommended crochet hook: </label><input type="text" name="hook" value="<%= @brand.hook %>"><br>
+    <label for="needle">Recommended knitting needle: </label><input type="text" name="needle" value="<%= @brand.needle %>"><br>
     <br>
-    <label for="name">Pattern Information: </label><input type="text" name="pattern_info" value="<%= @project.pattern_info%>"><br>
-    <label for="name">Notes: </label><input type="text" name="notes" value="<%= @project.notes%>"><br>
+
     <input type="submit" value="Update">
   </form>
