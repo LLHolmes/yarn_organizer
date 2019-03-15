@@ -8,7 +8,13 @@
 
 <h4>Project Yarn:</h4>
 <% @project.yarns.each do |yarn| %>
-  <p><a href="/brands/<%= yarn.brand.id %>"><%= yarn.brand.name %></a> - <a href="/yarns/<%= yarn.id %>"><%= yarn.color %></a></p>
+  <% if yarn.count > 0 && yarn.scrap > 0 %>
+    <p><a href="/brands/<%= yarn.brand.id %>"><%= yarn.brand.name %></a> - <a href="/yarns/<%= yarn.id %>"><%= yarn.color %></a> (<%= yarn.count %> skeins, <%= yarn.scrap %> oz. scrap)</p>
+  <% elsif yarn.count > 0 %>
+    <p><a href="/brands/<%= yarn.brand.id %>"><%= yarn.brand.name %></a> - <a href="/yarns/<%= yarn.id %>"><%= yarn.color %></a> (<%= yarn.count %> skeins)</p>
+  <% elsif yarn.scrap > 0 %>
+    <p><a href="/brands/<%= yarn.brand.id %>"><%= yarn.brand.name %></a> - <a href="/yarns/<%= yarn.id %>"><%= yarn.color %></a> (<%= yarn.scrap %> oz. scrap)</p>
+  <% end %>
 <% end %>
 
 <h4>Project Accessories:</h4>

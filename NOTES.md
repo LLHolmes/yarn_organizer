@@ -1,5 +1,6 @@
 To Do:
-show_project Add amount to project Yarns
+try to break / figure out scrap .7oz
+test show_project amount of Yarns
 edit_yarn & edit_brand with proper information
 edit_finished_project Project edit --> finished --> updates and moves yarn to stash
 Clean up layout & flow (adjust user home/index?):
