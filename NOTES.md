@@ -1,15 +1,13 @@
-post '/pirates' do
-  # binding.pry
-  pirate = Pirate.new(name: params[:pirate][:name], height: params[:pirate][:height], weight: params[:pirate][:weight])
-  params[:pirate][:ships].each do |ship_data|
-    ship = Ship.new(ship_data)
-    ship.pirate = pirate
-    ship.save
-  end
-  binding.pry
-end
+To Do:
+Project edit --> finished --> updates and moves yarn to stash
+Clean up layout & flow (adjust user home/index?):
+  Once logged in, shows welcome with master index of things individual user can do?:
+ - start a new project / add a new yarn/accessory
+ - find my project/yarn/accessory
+Try to break it / test everything:
+ - Double check current_user == @project.user validations, etc.
+CSS if possible
 
-* set up an if statement that if pirate.save: do what you want, as a way to make sure the pirate saves. *
 
 
 # App Overview
@@ -51,16 +49,7 @@ end
   [ ] create index of all projects for inspiration?
 
 
- To Do:
- Bulk add yarn - action
- Project edit --> finished --> updates and moves yarn to stash
- Clean up layout & flow (adjust user home/index?):
-   Once logged in, shows welcome with master index of things individual user can do?:
-  - start a new project / add a new yarn/accessory
-  - find my project/yarn/accessory
- Try to break it / test everything:
-  - Double check current_user == @project.user validations, etc.
- CSS if possible
+
 
 
 Specifications for the Sinatra Assessment

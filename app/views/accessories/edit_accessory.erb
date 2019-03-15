@@ -1,4 +1,4 @@
-<h3>Update <%= @accessory.name %>:</h3>
+<h2>Update <%= @accessory.name %>:</h2>
 
 <form action="/accessories/<%= @accessory.id %>" method="post">
   <input id="hidden" type="hidden" name="_method" value="patch">
