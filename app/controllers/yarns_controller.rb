@@ -83,7 +83,7 @@ class YarnsController < ApplicationController
     if current_user == @yarn.project.user
       erb :"yarns/show_yarn"
     else
-      flash.next[:unauthorized] = "You may not view other crafter's tools."
+      flash.next[:unauthorized] = "You may not view other crafter's yarn."
       redirect '/yarns'
     end
   end

@@ -45,7 +45,10 @@ class ProjectsController < ApplicationController
 
   get '/projects/:id' do
     @project = Project.find(params[:id])
-    if @project.name == "Stash"
+    if current_user != @project.user
+      flash.next[:unauthorized] = "You may not view other crafter's projects."
+      redirect '/projects'
+    elsif @project.name == "Stash"
       erb :"projects/show_stash"
     else
       erb :"projects/show_project"
