@@ -61,7 +61,6 @@ class YarnsController < ApplicationController
     end
 
     params[:yarn].each do |yarn_data|
-      # binding.pry
       if !yarn_data[:color].empty?
         yarn = Yarn.new(yarn_data)
         if yarn_data[:brand_id].empty?
@@ -77,37 +76,6 @@ class YarnsController < ApplicationController
       end
     end
     redirect "/yarns"
-
-
-    # if params[:yarn][:color] == ""
-    #   flash.now[:warning] = "Please specify a yarn color."
-    #   redirect '/accessories/new'
-    # elsif params[:yarn][:brand_id] == nil && params[:brand][:name] == ""
-    #   flash.now[:warning] = "Please specify a brand."
-    #   redirect '/accessories/new'
-    # else
-    #   @yarn = Yarn.new(params[:yarn])
-    #   if params[:yarn][:brand_id] == nil
-    #     @brand = Brand.create(params[:brand])
-    #     @yarn.brand = @brand
-    #   end
-
-      # if params[:yarn][:project_id] == nil
-      #   if params[:project][:name] != ""
-      #     @project = Project.new(params[:project])
-      #     @project.user = current_user
-      #     @project.save
-      #   else
-      #     @project = current_user.stash
-      #   end
-      #   @yarn.project = @project
-      # end
-
-
-
-
-    # flash.now[:error] = "Something went wrong.  Please try again."
-    # redirect '/yarns/new_bulk'
   end
 
   get '/yarns/:id' do

@@ -2,12 +2,17 @@
 
 <form action="/accessories/<%= @accessory.id %>" method="post">
   <input id="hidden" type="hidden" name="_method" value="patch">
-  <label for="name">Name: </label><input type="text" name="name" value="<%= @accessory.name %>">
+  <label for="name">Name: </label><input type="text" name="name" value="<%= @accessory.name %>"><br>
   <label for="project_id">Update Project: </label>
-  <select name="project_id">
-    <% current_user.projects.each do |project| %>
-      <option value="<%= project.id %>"> <%= project.name %> </option>
-    <% end %>
-  </select>
+    <select name="project_id">
+      <% current_user.projects.each do |project| %>
+        <% if @accessory.project == project %>
+          <option value="<%= project.id %>" selected> <%= project.name %> </option>
+        <% else %>
+          <option value="<%= project.id %>"> <%= project.name %> </option>
+        <% end %>
+      <% end %>
+    </select><br>
+
   <input type="submit" value="Update">
 </form>

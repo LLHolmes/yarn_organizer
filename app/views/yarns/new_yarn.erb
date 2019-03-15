@@ -2,10 +2,9 @@
 <form action="/yarns/new" method="post">
 
   <label for="yarn[color]">Color: </label><input type="text" name="yarn[color]" required><br>
-  <label>How much do you have?</label>
-  <label for="yarn[count]">  Full skeins: </label><input type="text" name="yarn[count]">br
-  <label for="yarn[scrap]">  Scraps: </label><input type="text" name="yarn[scrap]"> oz.<br>
 
+  <label for="yarn[count]">How many full skeins: </label><input type="text" name="yarn[count]"><br>
+  <label for="yarn[scrap]">How much scrap: </label><input type="text" name="yarn[scrap]"> oz.<br>
 
   <h3><label for="yarn[brand_id]">Select a Brand: </label></h3>
   <% current_user.brands.uniq.each do |brand| %>

@@ -1,13 +1,32 @@
-<h2>Update <%= @accessory.name %>:</h2>
+<h2>Update <%= @yarn.brand.name %> - <%= @yarn.color %>:</h2>
 
-<form action="/accessories/<%= @accessory.id %>" method="post">
+<form action="/yarns/<%= @yarn.id %>" method="post">
   <input id="hidden" type="hidden" name="_method" value="patch">
-  <label for="name">Name: </label><input type="text" name="name" value="<%= @accessory.name %>">
+  <label for="color">Color: </label><input type="text" name="color" value="<%= @yarn.color %>"><br>
+  <label for="count">How many full skeins: </label><input type="text" name="count" value="<%= @yarn.count %>"><br>
+  <label for="scrap">How much scrap: </label><input type="text" name="scrap" value="<%= @yarn.scrap %>"> oz.<br>
+
+  <label for="brand_id">Update Brand: </label>
+    <select name="brand_id">
+      <% current_user.brands.uniq.each do |brand| %>
+        <% if @yarn.brand == brand %>
+          <option value="<%= brand.id %>" selected> <%= brand.name %> </option>
+        <% else %>
+          <option value="<%= brand.id %>"> <%= brand.name %> </option>
+        <% end %>
+      <% end %>
+    </select><br>
+
   <label for="project_id">Update Project: </label>
-  <select name="project_id">
-    <% current_user.projects.each do |project| %>
-      <option value="<%= project.id %>"> <%= project.name %> </option>
-    <% end %>
-  </select>
+    <select name="project_id">
+      <% current_user.projects.each do |project| %>
+        <% if @yarn.project == project %>
+          <option value="<%= project.id %>" selected> <%= project.name %> </option>
+        <% else %>
+          <option value="<%= project.id %>"> <%= project.name %> </option>
+        <% end %>
+      <% end %>
+    </select><br>
+
   <input type="submit" value="Update">
 </form>
