@@ -2,36 +2,36 @@
 
 <p>Notes:  <%= @project.notes %></p>
 
-<% if !current_user.yarns.empty? %>
-  <h3>My Yarn:</h3>
+<% if !@project.yarns.empty? %>
+  <h3>My Extra Yarn:</h3>
 
-  <% current_user.yarns_sorted.each do |yarn| %>
+  <% @project.yarns_sorted.each do |yarn| %>
     <div>
       <% if yarn.count && yarn.scrap %>
-        <% if yarn.count == 1 %>
-          <p><a href="/brands/<%= yarn.brand.id %>"><%= yarn.brand.name %></a> - <a href="/yarns/<%= yarn.id %>"><%= yarn.color %></a> (<%= yarn.count %> skein, <%= yarn.scrap.to_f %> oz. scrap)</p>
+        <% if yarn.scrap.to_f == 0.0 && yarn.count == 1 %>
+          <p><a href="/brands/<%= yarn.brand.id %>"><%= yarn.brand.name %></a> - <a href="/yarns/<%= yarn.id %>"><%= yarn.color %></a> (Size <%= yarn.brand.weight %>, <%= yarn.brand.material %> - <%= yarn.count %> skein)</p>
+        <% elsif yarn.scrap.to_f == 0.0 && yarn.count > 1 %>
+          <p><a href="/brands/<%= yarn.brand.id %>"><%= yarn.brand.name %></a> - <a href="/yarns/<%= yarn.id %>"><%= yarn.color %></a> (Size <%= yarn.brand.weight %>, <%= yarn.brand.material %> - <%= yarn.count %> skeins)</p>
+        <% elsif yarn.count == 1 %>
+          <p><a href="/brands/<%= yarn.brand.id %>"><%= yarn.brand.name %></a> - <a href="/yarns/<%= yarn.id %>"><%= yarn.color %></a> (Size <%= yarn.brand.weight %>, <%= yarn.brand.material %> - <%= yarn.count %> skein, <%= yarn.scrap.to_f %> oz. scrap)</p>
         <% elsif yarn.count > 1 %>
-          <p><a href="/brands/<%= yarn.brand.id %>"><%= yarn.brand.name %></a> - <a href="/yarns/<%= yarn.id %>"><%= yarn.color %></a> (<%= yarn.count %> skeins, <%= yarn.scrap.to_f %> oz. scrap)</p>
+          <p><a href="/brands/<%= yarn.brand.id %>"><%= yarn.brand.name %></a> - <a href="/yarns/<%= yarn.id %>"><%= yarn.color %></a> (Size <%= yarn.brand.weight %>, <%= yarn.brand.material %> - <%= yarn.count %> skeins, <%= yarn.scrap.to_f %> oz. scrap)</p>
         <% end %>
       <% elsif yarn.count && yarn.count == 1 %>
-        <p><a href="/brands/<%= yarn.brand.id %>"><%= yarn.brand.name %></a> - <a href="/yarns/<%= yarn.id %>"><%= yarn.color %></a> (<%= yarn.count %> skein)</p>
+        <p><a href="/brands/<%= yarn.brand.id %>"><%= yarn.brand.name %></a> - <a href="/yarns/<%= yarn.id %>"><%= yarn.color %></a> (Size <%= yarn.brand.weight %>, <%= yarn.brand.material %> - <%= yarn.count %> skein)</p>
       <% elsif yarn.count && yarn.count > 1 %>
-        <p><a href="/brands/<%= yarn.brand.id %>"><%= yarn.brand.name %></a> - <a href="/yarns/<%= yarn.id %>"><%= yarn.color %></a> (<%= yarn.count %> skeins)</p>
+        <p><a href="/brands/<%= yarn.brand.id %>"><%= yarn.brand.name %></a> - <a href="/yarns/<%= yarn.id %>"><%= yarn.color %></a> (Size <%= yarn.brand.weight %>, <%= yarn.brand.material %> - <%= yarn.count %> skeins)</p>
       <% elsif yarn.scrap %>
-        <p><a href="/brands/<%= yarn.brand.id %>"><%= yarn.brand.name %></a> - <a href="/yarns/<%= yarn.id %>"><%= yarn.color %></a> (<%= yarn.scrap.to_f %> oz. scrap)</p>
+        <p><a href="/brands/<%= yarn.brand.id %>"><%= yarn.brand.name %></a> - <a href="/yarns/<%= yarn.id %>"><%= yarn.color %></a> (Size <%= yarn.brand.weight %>, <%= yarn.brand.material %> - <%= yarn.scrap.to_f %> oz. scrap)</p>
       <% end %>
-      <p>Size <%= yarn.brand.weight %>, <%= yarn.brand.material %>
-      <% if yarn.project != @project %>
-        ~ Current Project: <a href="/projects/<%= yarn.project.id %>"><%= yarn.project.name %></a>
-      <% end %></p>
     </div>
   <% end %>
 
 <% end %>
 
-<% if !current_user.accessories.empty? %>
-  <h3>My Accessories:</h3>
-  <% current_user.accessories.each do |acc| %>
+<% if !@project.accessories.empty? %>
+  <h3>My Extra Accessories:</h3>
+  <% @project.accessories.each do |acc| %>
     <p><a href="/accessories/<%= acc.id %>"><%= acc.name %></a>
     <% if acc.project != @project %>
       ~ Current Project: <a href="/projects/<%= acc.project.id %>"><%= acc.project.name %>

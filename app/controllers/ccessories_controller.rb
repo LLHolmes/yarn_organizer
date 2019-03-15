@@ -9,6 +9,7 @@ class CcessoriesController < ApplicationController
   end
 
   post '/accessories/new' do
+    binding.pry
     if params[:name] == ""
       flash.now[:warning] = "Please give your tool a name."
       redirect '/accessories/new'
@@ -17,10 +18,10 @@ class CcessoriesController < ApplicationController
       redirect '/accessories/new'
     else
       accessory = Accessory.new(params)
-      if params[:project_id] == ""
-        accessory.project = current_user.stash
-      else
+      if params[:project_id]
         accessory.project = Project.find(params[:project_id])
+      else
+        accessory.project = current_user.stash
       end
       if accessory.save
         redirect "/accessories/#{accessory.id}"

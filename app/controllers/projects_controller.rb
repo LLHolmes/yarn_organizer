@@ -12,7 +12,6 @@ class ProjectsController < ApplicationController
   end
 
   post '/projects/new' do
-    binding.pry
     if Project.find_by_name(params[:project][:name])
       flash.now[:warning] = "You already have a project with that name. Please choose another."
       redirect '/projects/new'

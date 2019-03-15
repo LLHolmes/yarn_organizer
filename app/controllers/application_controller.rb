@@ -10,6 +10,15 @@ class ApplicationController < Sinatra::Base
 
   get '/' do
     if logged_in?
+      @lace = current_user.brand_by_weight("0")
+      @sock = current_user.brand_by_weight("1")
+      @fine = current_user.brand_by_weight("2")
+      @light = current_user.brand_by_weight("3")
+      @medium = current_user.brand_by_weight("4")
+      @bulky = current_user.brand_by_weight("5")
+      @super_bulky = current_user.brand_by_weight("6")
+      @jumbo = current_user.brand_by_weight("7")
+      @novelty = current_user.brand_by_weight("Novelty")
       erb :index
     else
       erb :"user/login"
