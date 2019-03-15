@@ -2,7 +2,8 @@ To Do:
 try to break / figure out scrap .7oz
 test show_project amount of Yarns
 test edit_yarn, delete_yarn & edit_brand, delete_brand
-edit_finished_project Project edit --> finished --> updates and moves yarn to stash
+test edit_finished_project Project edit --> finished --> updates and moves yarn to stash
+
 Clean up layout & flow (adjust user home/index?):
   Once logged in, shows welcome with master index of things individual user can do?:
  - start a new project / add a new yarn/accessory

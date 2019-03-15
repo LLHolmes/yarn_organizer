@@ -1,58 +1,15 @@
-<h1>Congratulations on finishing your project!</h1>
-<h3>Please update your remaining yarn.</h3>
-<p>All Scraps yarn and tools will be added back into your stash unless otherwise specified.</p>
+<h1>Congratulations on finishing your <%= @project.name %> project!</h1>
+<h3>Please update your remaining yarn from this project.</h3>
+<p>It will be added to your "Stash" along with all tools.</p>
 
   <form action="/projects/<%= @project.id %>/finished" method="post">
     <input id="hidden" type="hidden" name="_method" value="patch">
-    <label for="project[name]">Name: </label><input type="text" name="project[name]" value="<%= @project.name%>" required>
-    <label for="project[status]">Status: </label>
-    <% if @project.status == "In Progress" %>
-      <select name="project[status]">
-        <option value="In Progress" selected> In Progress </option>
-        <option value="Upcoming"> Upcoming </option>
-        <option value="Finished"> Finished </option>
-      </select>
-    <% elsif @project.status == "Upcoming" %>
-      <select name="project[status]">
-        <option value="In Progress"> In Progress </option>
-        <option value="Upcoming" selected> Upcoming </option>
-        <option value="Finished"> Finished </option>
-      </select>
-    <% else %>
-      <select name="project[status]">
-        <option value="In Progress"> In Progress </option>
-        <option value="Upcoming"> Upcoming </option>
-        <option value="Finished" selected> Finished </option>
-      </select>
-    <% end %>
-    <br>
-    <label for="project[pattern_info]">Pattern Information: </label><input type="text" name="project[pattern_info]" value="<%= @project.pattern_info%>"><br>
-    <label for="project[notes]">Notes/Description: </label><br>
-    <textarea rows="5" cols="60" name="project[notes]" value="<%= @project.notes%>"></textarea><br>
-
-    <p>Select Yarn:</p>
-    <% current_user.yarns.each do |yarn| %>
-      <% if @project.yarns.include?(yarn) %>
-        <input type="checkbox" name="yarns[ids][]" value="<%= yarn.id %>" checked><%= yarn.brand.name %> - <%= yarn.color %>  ~  Currently in this project.<br>
-      <% else %>
-        <% if yarn.project.name == "Stash" %>
-          <input type="checkbox" name="yarns[ids][]" value="<%= yarn.id %>"><%= yarn.brand.name %> - <%= yarn.color %><br>
-        <% else %>
-          <input type="checkbox" name="yarns[ids][]" value="<%= yarn.id %>"><%= yarn.brand.name %> - <%= yarn.color %>  ~  Current Project: <%= yarn.project.name %><br>
-        <% end %>
-      <% end %>
-    <% end %>
-
-    <p>Select Tools/Accessories:</p>
-    <% current_user.accessories.each do |acc| %>
-      <% if @project.accessories.include?(acc) %>
-        <input type="checkbox" name="accessories[ids][]" value="<%= acc.id %>" checked><%= acc.name %>  ~  Current Project: <%= acc.project.name %><br>
-      <% else %>
-        <input type="checkbox" name="accessories[ids][]" value="<%= acc.id %>"><%= acc.name %>  ~  Current Project: <%= acc.project.name %><br>
-      <% end %>
+    <% @project.yarns.each do |yarn| %>
+      <label for="yarn[][count]"><%= yarn.brand.name %> - <%= yarn.color %>: Remaining full skeins: </label><input type="text" name="yarn[][count]" value="<%= @yarn.count %>">
+      <label for="yarn[][scrap]">   Remaining scrap: </label><input type="text" name="yarn[][scrap]" value="<%= @yarn.scrap %>"> oz.<br>
     <% end %>
 
     <br>
 
-    <input type="submit" value="Update">
+    <input type="submit" value="Finish Project!">
   </form>
