@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_03_07_194241) do
+ActiveRecord::Schema.define(version: 2019_03_15_154011) do
 
   create_table "accessories", force: :cascade do |t|
     t.string "name"
@@ -44,7 +44,7 @@ ActiveRecord::Schema.define(version: 2019_03_07_194241) do
   create_table "yarns", force: :cascade do |t|
     t.string "color"
     t.integer "count"
-    t.float "scrap"
+    t.string "scrap"
     t.integer "project_id"
     t.integer "brand_id"
   end
