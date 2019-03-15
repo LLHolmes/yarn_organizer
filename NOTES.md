@@ -1,5 +1,7 @@
 To Do:
-Project edit --> finished --> updates and moves yarn to stash
+show_project Add amount to project Yarns
+edit_yarn & edit_brand with proper information
+edit_finished_project Project edit --> finished --> updates and moves yarn to stash
 Clean up layout & flow (adjust user home/index?):
   Once logged in, shows welcome with master index of things individual user can do?:
  - start a new project / add a new yarn/accessory

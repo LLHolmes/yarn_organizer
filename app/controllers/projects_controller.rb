@@ -89,6 +89,47 @@ class ProjectsController < ApplicationController
     redirect '/projects/new'
   end
 
+  # get '/projects/:id/finished_edit' do
+  #   @project = Project.find(params[:id])
+  #   if current_user != @project.user
+  #     flash.next[:unauthorized] = "You may not edit other crafter's projects."
+  #     redirect '/projects'
+  #   end
+  #   erb :"projects/edit_project"
+  # end
+  #
+  # patch '/projects/:id/finished' do
+  #   @project = Project.find(params[:id])
+  #   if current_user != @project.user
+  #     flash.now[:unauthorized] = "You may not edit other crafter's projects."
+  #     redirect '/projects'
+  #   end
+  #
+  #   @project.update(params[:project])
+  #   if !!params[:yarns][:ids]
+  #     yarns = params[:yarns][:ids]
+  #     yarns.each do |ids|
+  #       yarn = Yarn.find(ids)
+  #       yarn.project = @project
+  #       yarn.save
+  #     end
+  #   end
+  #   if !!params[:accessories][:ids]
+  #     accs = params[:accessories][:ids]
+  #     accs.each do |ids|
+  #       accessory = Accessory.find(ids)
+  #       accessory.project = @project
+  #       accessory.save
+  #     end
+  #   end
+  #   if @project.save
+  #     redirect "/projects/#{@project.id}"
+  #   end
+  #
+  #   flash.now[:error] = "Something went wrong.  Please try again."
+  #   redirect '/projects/new'
+  # end
+
   delete '/projects/:id/delete' do
     @project = Project.find(params[:id])
     if current_user != @project.user
