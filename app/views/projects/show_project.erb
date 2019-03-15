@@ -1,25 +1,26 @@
-<h2><%= @project.name %></h2>
+<h2><%= @project.status %> Project:  <%= @project.name %></h2>
 
-<p></p>
+<p>Pattern Information:  <%= @project.pattern_info %></p>
+<p>Notes:  <%= @project.notes %></p>
 
-<h1>THIS NEEDS TO BE FILLED IN!!!!!</h1>
-
-<p></p>
-
-<h4>Project Yarn:</h4>
-<% @project.yarns.each do |yarn| %>
-  <% if yarn.count > 0 && yarn.scrap > 0 %>
-    <p><a href="/brands/<%= yarn.brand.id %>"><%= yarn.brand.name %></a> - <a href="/yarns/<%= yarn.id %>"><%= yarn.color %></a> (<%= yarn.count %> skeins, <%= yarn.scrap %> oz. scrap)</p>
-  <% elsif yarn.count > 0 %>
-    <p><a href="/brands/<%= yarn.brand.id %>"><%= yarn.brand.name %></a> - <a href="/yarns/<%= yarn.id %>"><%= yarn.color %></a> (<%= yarn.count %> skeins)</p>
-  <% elsif yarn.scrap > 0 %>
-    <p><a href="/brands/<%= yarn.brand.id %>"><%= yarn.brand.name %></a> - <a href="/yarns/<%= yarn.id %>"><%= yarn.color %></a> (<%= yarn.scrap %> oz. scrap)</p>
+<% if !@project.yarns.empty? %>
+  <h4>Project Yarn:</h4>
+  <% @project.yarns.each do |yarn| %>
+    <% if yarn.count && yarn.scrap %>
+      <p><a href="/brands/<%= yarn.brand.id %>"><%= yarn.brand.name %></a> - <a href="/yarns/<%= yarn.id %>"><%= yarn.color %></a> (<%= yarn.count %> skeins, <%= yarn.scrap.to_f %> oz. scrap)</p>
+    <% elsif yarn.count %>
+      <p><a href="/brands/<%= yarn.brand.id %>"><%= yarn.brand.name %></a> - <a href="/yarns/<%= yarn.id %>"><%= yarn.color %></a> (<%= yarn.count %> skeins)</p>
+    <% elsif yarn.scrap %>
+      <p><a href="/brands/<%= yarn.brand.id %>"><%= yarn.brand.name %></a> - <a href="/yarns/<%= yarn.id %>"><%= yarn.color %></a> (<%= yarn.scrap.to_f %> oz. scrap)</p>
+    <% end %>
   <% end %>
 <% end %>
 
-<h4>Project Accessories:</h4>
-<% @project.accessories.each do |acc| %>
-  <p><a href="/accessories/<%= acc.id %>"><%= acc.name %></a></p>
+<% if !@project.accessories.empty? %>
+  <h4>Project Accessories:</h4>
+  <% @project.accessories.each do |acc| %>
+    <p><a href="/accessories/<%= acc.id %>"><%= acc.name %></a></p>
+  <% end %>
 <% end %>
 
 <% if current_user == @project.user %>

@@ -1,12 +1,14 @@
 <h1>Congratulations on finishing your <%= @project.name %> project!</h1>
-<h3>Please update your remaining yarn from this project.</h3>
-<p>It will be added to your "Stash" along with all tools.</p>
+<h2>Please update your remaining yarn from this project.</h2>
+<p>It will all be added to your "Stash" along with all tools.</p>
 
   <form action="/projects/<%= @project.id %>/finished" method="post">
     <input id="hidden" type="hidden" name="_method" value="patch">
     <% @project.yarns.each do |yarn| %>
-      <label for="yarn[][count]"><%= yarn.brand.name %> - <%= yarn.color %>: Remaining full skeins: </label><input type="text" name="yarn[][count]" value="<%= @yarn.count %>">
-      <label for="yarn[][scrap]">   Remaining scrap: </label><input type="text" name="yarn[][scrap]" value="<%= @yarn.scrap %>"> oz.<br>
+      <h3><%= yarn.brand.name %> - <%= yarn.color %>:</h3>
+      <input id="hidden" type="hidden" name="yarn[][id]" value="<%= yarn.id %>">
+      <label for="yarn[][count]">Remaining full skeins: </label><input type="text" name="yarn[][count]" value="<%= yarn.count %>">
+      <label for="yarn[][scrap]">Remaining scrap: </label><input type="text" name="yarn[][scrap]" value="<%= yarn.scrap %>"> oz.<br>
     <% end %>
 
     <br>

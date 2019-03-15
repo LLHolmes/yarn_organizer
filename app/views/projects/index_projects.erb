@@ -26,8 +26,10 @@
     <% end %>
 <% end %>
 
-<a href="/projects/<%= current_user.stash.id %>">Visit your Stash</a>
+<br>
+
+<a href="/projects/<%= current_user.stash.id %>">Visit your Stash</a><br>
 
 <form action="/projects/new" method="get">
-  <input type="submit" value="Add Project">
+  <input type="submit" value="Create a new project">
 </form>

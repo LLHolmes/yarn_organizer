@@ -7,22 +7,12 @@
 
     <form action="/yarns/<%= yarn.id %>" method="post">
       <input id="hidden" type="hidden" name="_method" value="patch">
-
       <select name="project_id">
         <% current_user.projects.each do |project| %>
           <option value="<%= project.id %>"> <%= project.name %> </option>
         <% end %>
       </select>
       <input type="submit" value="Switch Project">
-    </form>
-
-    <form action="/yarns/<%= yarn.id %>/edit" method="get">
-      <input type="submit" value="Update Yarn">
-    </form>
-
-    <form action="/yarns/<%= yarn.id %>/delete" method="post">
-      <input id="hidden" type="hidden" name="_method" value="delete">
-      <input type="submit" value="Delete Yarn">
     </form>
   </div>
 <% end %>

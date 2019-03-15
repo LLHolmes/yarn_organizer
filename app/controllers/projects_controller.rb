@@ -45,7 +45,11 @@ class ProjectsController < ApplicationController
 
   get '/projects/:id' do
     @project = Project.find(params[:id])
-    erb :"projects/show_project"
+    if @project.name == "Stash"
+      erb :"projects/show_stash"
+    else
+      erb :"projects/show_project"
+    end
   end
 
   get '/projects/:id/edit' do
@@ -53,8 +57,11 @@ class ProjectsController < ApplicationController
     if current_user != @project.user
       flash.next[:unauthorized] = "You may not edit other crafter's projects."
       redirect '/projects'
+    elsif @project.name == "Stash"
+      erb :"projects/edit_stash"
+    else
+      erb :"projects/edit_project"
     end
-    erb :"projects/edit_project"
   end
 
   patch '/projects/:id' do
@@ -65,7 +72,7 @@ class ProjectsController < ApplicationController
     end
 
     @project.update(params[:project])
-    if !!params[:yarns][:ids]
+    if params[:yarns]
       yarns = params[:yarns][:ids]
       yarns.each do |ids|
         yarn = Yarn.find(ids)
@@ -73,7 +80,7 @@ class ProjectsController < ApplicationController
         yarn.save
       end
     end
-    if !!params[:accessories][:ids]
+    if params[:accessories]
       accs = params[:accessories][:ids]
       accs.each do |ids|
         accessory = Accessory.find(ids)
@@ -82,11 +89,12 @@ class ProjectsController < ApplicationController
       end
     end
     if @project.save
-      if params[:status] == "Finished"
-        redirect "/projects/#{@project.id}/finished_edit"
-      else
-        redirect "/projects/#{@project.id}"
+      if @project.status == "Finished"
+        if !@project.accessories.empty? || !@project.yarns.empty?
+          redirect "/projects/#{@project.id}/finished_edit"
+        end
       end
+      redirect "/projects/#{@project.id}"
     end
 
     flash.now[:error] = "Something went wrong.  Please try again."
@@ -116,7 +124,7 @@ class ProjectsController < ApplicationController
           acc.save
         end
       end
-
+      binding.pry
       params[:yarn].each do |yarn_data|
         yarn = Yarn.find(yarn_data[:id])
         yarn.update(yarn_data)
@@ -137,8 +145,16 @@ class ProjectsController < ApplicationController
     if current_user != @project.user
       flash.now[:unauthorized] = "You may not delete other crafter's projects."
     else
-      yarn = @project.yarns
-      yarn.project = current_user.stash
+      all_yarn = @project.yarns
+      all_yarn.each do |yarn|
+        yarn.project = current_user.stash
+        yarn.save
+      end
+      all_acc = @project.accessories
+      all_acc.each do |acc|
+        acc.project = current_user.stash
+        acc.save
+      end
       @project.delete
     end
     redirect '/projects'

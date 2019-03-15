@@ -22,7 +22,7 @@ class UsersController < ApplicationController
         stash.user = user
         stash.save
         session[:user_id] = user.id
-        redirect '/'
+        redirect '/yarns/new_bulk'
       end
     end
     flash.next[:error] = "Something went wrong.  Please try again."

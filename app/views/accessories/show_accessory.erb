@@ -1,5 +1,5 @@
 <h2><%= @accessory.name %></h2>
-<p>Current Project: <%= @accessory.project.name %></p>
+<p>Current Project: <a href="/projects/<%= @accessory.project.id %>"><%= @accessory.project.name %></a></p>
 
 <% if current_user == @accessory.project.user %>
   <form action="/acessories/<%= @accessory.id %>/edit" method="get">

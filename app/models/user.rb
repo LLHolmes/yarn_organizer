@@ -22,6 +22,14 @@ class User < ActiveRecord::Base
     self.projects.detect { |project| project.name == "Stash" }
   end
 
+  def yarns_by_brand
+    self.yarns.sort_by { |yarn| yarn.color }.sort_by { |yarn| yarn.brand.name }
+  end
+
+  def yarns_sorted
+    self.yarns_by_brand.sort_by { |yarn| yarn.brand.material }.sort_by { |yarn| yarn.brand.weight }
+  end
+
   def brands_sorted
     self.brands.sort_by { |brand| brand.name }.sort_by { |brand| brand.material }
   end

@@ -4,7 +4,7 @@
   <input id="hidden" type="hidden" name="_method" value="patch">
   <label for="color">Color: </label><input type="text" name="color" value="<%= @yarn.color %>"><br>
   <label for="count">How many full skeins: </label><input type="text" name="count" value="<%= @yarn.count %>"><br>
-  <label for="scrap">How much scrap: </label><input type="text" name="scrap" value="<%= @yarn.scrap %>"> oz.<br>
+  <label for="scrap">How much scrap: </label><input type="text" name="scrap" value="<%= @yarn.scrap.to_f %>"> oz.<br>
 
   <label for="brand_id">Update Brand: </label>
     <select name="brand_id">

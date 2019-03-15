@@ -5,13 +5,22 @@
   <li><a href="/projects/<%= wip.id %>"><%= wip.name %></a></li>
   <% end %>
 </ul>
+<form action="/projects/new" method="get">
+  <input type="submit" value="Create a new project">
+</form>
 
 <h3><a href="/yarns">Your Yarn:</h3>
 <ul>
-  <% current_user.yarns.each do |yarn| %>
+  <% current_user.yarns_by_brand.each do |yarn| %>
   <li><a href="/brands/<%= yarn.brand.id %>"><%= yarn.brand.name %></a> - <a href="/yarns/<%= yarn.id %>"><%= yarn.color %></a></li>
   <% end %>
 </ul>
+<form action="/yarns/new" method="get">
+  <input type="submit" value="Add new yarn">
+</form>
+<form action="/yarns/new_bulk" method="get">
+  <input type="submit" value="Add multiple yarns">
+</form>
 
 <h3><a href="/accessories">Your Accessories:</h3>
 <ul>
@@ -19,3 +28,6 @@
   <li><a href="/accessories/<%= item.id %>"><%= item.name %></a></li>
   <% end %>
 </ul>
+<form action="/accessories/new" method="get">
+  <input type="submit" value="Add a tool">
+</form>

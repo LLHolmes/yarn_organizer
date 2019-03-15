@@ -1,0 +1,30 @@
+<h3>Update Stash:</h3>
+
+  <form action="/projects/<%= @project.id %>" method="post">
+    <input id="hidden" type="hidden" name="_method" value="patch">
+    <label for="project[name]">Name: </label><input type="text" name="project[name]" value="<%= @project.name%>" required><br>
+    <label for="project[notes]">Notes: </label><br>
+    <textarea rows="5" cols="60" name="project[notes]" value="<%= @project.notes%>"></textarea><br>
+
+    <p>Select Yarn:</p>
+    <% current_user.yarns.each do |yarn| %>
+      <% if @project.yarns.include?(yarn) %>
+        <input type="checkbox" name="yarns[ids][]" value="<%= yarn.id %>" checked><%= yarn.brand.name %> - <%= yarn.color %><br>
+      <% else %>
+        <input type="checkbox" name="yarns[ids][]" value="<%= yarn.id %>"><%= yarn.brand.name %> - <%= yarn.color %>  ~  Project: <%= yarn.project.name %><br>
+      <% end %>
+    <% end %>
+
+    <p>Select Tools/Accessories:</p>
+    <% current_user.accessories.each do |acc| %>
+      <% if @project.accessories.include?(acc) %>
+        <input type="checkbox" name="accessories[ids][]" value="<%= acc.id %>" checked><%= acc.name %><br>
+      <% else %>
+        <input type="checkbox" name="accessories[ids][]" value="<%= acc.id %>"><%= acc.name %>  ~  Project: <%= acc.project.name %><br>
+      <% end %>
+    <% end %>
+
+    <br>
+
+    <input type="submit" value="Update">
+  </form>
