@@ -1,9 +1,9 @@
-<h2>View your crafting stash:</h2>
+<h1>View my crafting stash:</h1>
 
 <p>Notes:  <%= @project.notes %></p>
 
 <% if !current_user.yarns.empty? %>
-  <h3>Your Yarn:</h3>
+  <h3>My Yarn:</h3>
 
   <% current_user.yarns_sorted.each do |yarn| %>
     <div>
@@ -22,7 +22,7 @@
       <% end %>
       <p>Size <%= yarn.brand.weight %>, <%= yarn.brand.material %>
       <% if yarn.project != @project %>
-        ~ Current Project: <a href="/projects/<%= yarn.project.id %>"><%= yarn.project.name %>
+        ~ Current Project: <a href="/projects/<%= yarn.project.id %>"><%= yarn.project.name %></a>
       <% end %></p>
     </div>
   <% end %>
@@ -30,7 +30,7 @@
 <% end %>
 
 <% if !current_user.accessories.empty? %>
-  <h3>Your Accessories:</h3>
+  <h3>My Accessories:</h3>
   <% current_user.accessories.each do |acc| %>
     <p><a href="/accessories/<%= acc.id %>"><%= acc.name %></a>
     <% if acc.project != @project %>
@@ -41,13 +41,6 @@
 
 <% if current_user == @project.user %>
   <form action="/projects/<%= @project.id %>/edit" method="get">
-    <input type="submit" value="Update Project">
+    <input type="submit" value="Update Stash">
   </form>
-
-  <% if @project.name != "Stash" %>
-    <form action="/projects/<%= @project.id %>/delete" method="post">
-      <input id="hidden" type="hidden" name="_method" value="delete">
-      <input type="submit" value="Delete Project">
-    </form>
-  <% end %>
 <% end %>

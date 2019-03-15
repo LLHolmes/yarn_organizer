@@ -1,9 +1,9 @@
-<h1>Your Yarn</h1>
+<h1>My Yarn</h1>
 
-<% current_user.yarns.each do |yarn| %>
+<% current_user.yarns_sorted.each do |yarn| %>
   <div>
     <h3><a href="/brands/<%= yarn.brand.id %>"><%= yarn.brand.name %></a> - <a href="/yarns/<%= yarn.id %>"><%= yarn.color %></a></h3>
-    <p>Current Project: <a href="/projects/<%= yarn.project.id %>"><%= yarn.project.name %></p>
+    <label>Current Project: <a href="/projects/<%= yarn.project.id %>"><%= yarn.project.name %></a></label>
 
     <form action="/yarns/<%= yarn.id %>" method="post">
       <input id="hidden" type="hidden" name="_method" value="patch">

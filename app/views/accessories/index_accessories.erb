@@ -1,9 +1,9 @@
-<h1>Your Accessories</h1>
+<h1>My Accessories</h1>
 
 <% current_user.accessories.each do |acc| %>
   <div>
-    <h3><%= acc.name %></h3>
-    <p>Current Project: <a href="/projects/<%= acc.project.id %>"><%= acc.project.name %></a></p>
+    <h3><a href="/accessories/<%= acc.id %>"><%= acc.name %></a></h3>
+    <label>Current Project: <a href="/projects/<%= acc.project.id %>"><%= acc.project.name %></a></label>
 
     <form action="/accessories/<%= acc.id %>" method="post">
       <input id="hidden" type="hidden" name="_method" value="patch">

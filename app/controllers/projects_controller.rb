@@ -19,7 +19,7 @@ class ProjectsController < ApplicationController
     else
       @project = Project.new(params[:project])
       @project.user = current_user
-      if !!params[:yarns][:ids]
+      if !!params[:yarns]
         yarns = params[:yarns][:ids]
         yarns.each do |ids|
           yarn = Yarn.find(ids)
@@ -27,7 +27,7 @@ class ProjectsController < ApplicationController
           yarn.save
         end
       end
-      if !!params[:accessories][:ids]
+      if !!params[:accessories]
         accs = params[:accessories][:ids]
         accs.each do |ids|
           accessory = Accessory.find(ids)
@@ -35,8 +35,8 @@ class ProjectsController < ApplicationController
           accessory.save
         end
       end
-      if project.save
-        redirect "/projects/#{project.id}"
+      if @project.save
+        redirect "/projects/#{@project.id}"
       end
     end
     flash.now[:error] = "Something went wrong.  Please try again."

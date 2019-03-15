@@ -1,12 +1,16 @@
 <h2><a href="/brands/<%= @yarn.brand.id %>"><%= @yarn.brand.name %></a> - <%= @yarn.color %></h2>
 <p>Current Project: <a href="/projects/<%= @yarn.project.id %>"><%= @yarn.project.name %></p></a>
 <% if @yarn.count && @yarn.scrap %>
-  <p>Full skeins in stash: <%= @yarn.count %></p>
-  <p>Scraps in stash: <%= @yarn.scrap.to_f %></p>
+  <% if @yarn.scrap.to_f == 0.0 %>
+    <p>Full skeins in stash: <%= @yarn.count %></p>
+  <% else %>
+    <p>Full skeins in stash: <%= @yarn.count %></p>
+    <p>Scraps in stash: <%= @yarn.scrap.to_f %> oz.</p>
+  <% end %>
 <% elsif @yarn.count %>
   <p>Full skeins in stash: <%= @yarn.count %></p>
 <% elsif @yarn.scrap %>
-  <p>Scraps in stash: <%= @yarn.scrap.to_f %></p>
+  <p>Scraps in stash: <%= @yarn.scrap.to_f %> oz.</p>
 <% end %>
 
 <% if current_user == @yarn.project.user %>

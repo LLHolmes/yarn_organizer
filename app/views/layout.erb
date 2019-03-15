@@ -1,25 +1,22 @@
 <!doctype html>
 <html>
   <head>
-    <title>Yarn Organizer</title>
-    <!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css"> -->
+    <title>Crafting Stash Organizer</title>
   </head>
   <body>
     <nav>
       <% if logged_in? %>
-        <!-- create a new project, add a new yarn, add an accessory -->
-        <!-- view/find my projects, view/find my yarn collection, view/find my accessories -->
         <% if current_user.name.end_with?("s") %>
           <p><%= current_user.name %>' Stash Organizer</p>
         <% else %>
           <p><%= current_user.name %>'s Stash Organizer</p>
         <% end %>
-        <p><a href="/">Home</a></p>
-        <p><a href="/projects">My Projects</a></p>
-        <p><a href="/yarns">My Yarn</a></p>
-        <p><a href="/accessories">My Tools</a></p>
-        <p><a href="/account">Account Details</a></p>
-        <p><a href="/logout">Log Out</a></p>
+        <a href="/">Home</a><br>
+        <a href="/projects">My Projects</a> - <a href="/projects/new">New Project</a><br>
+        <a href="/yarns">My Yarn</a> - <a href="/yarns/new">New Yarn</a> - <a href="/yarns/new_bulk">Many New Yarns</a><br>
+        <a href="/accessories">My Tools</a> - <a href="/accessories/new">New Tool</a><br>
+        <a href="/account">Account Details</a><br>
+        <a href="/logout">Log Out</a><br>
 
       <% else %>
         <p><a href="/login">Log In</a></p>
@@ -36,7 +33,5 @@
       <%= yield %>
 
     </div>
-    <!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script> -->
   </body>
 </html>

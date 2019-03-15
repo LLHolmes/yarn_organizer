@@ -1,5 +1,5 @@
-<h2>Stock your stash:</h2>
-<p>Add multiple different yarns to your stash. However, you can only create one new brand of yarn and/or one new project at a time.</p>
+<h2>Stock my stash:</h2>
+<p>Add up to 10 different yarns. However, only one brand and project can be created at a time.</p>
 
   <form action="/yarns/new_bulk" method="post">
 
@@ -43,8 +43,9 @@
       <textarea rows="2" cols="60" name="project[notes]"></textarea><br>
       <br>
 
-  <h2>Add new yarn to your stash:</h2>
+  <h2>Add new yarn to my stash:</h2>
     <div>
+      <p>Yarn #1:</p>
       <label for="yarn[][brand_id]">Select a brand: </label>
         <select name="yarn[][brand_id]">
           <% current_user.brands.each do |brand| %>
@@ -74,6 +75,7 @@
     <br><br>
 
     <div>
+      <p>Yarn #2:</p>
       <label for="yarn[][brand_id]">Select a brand: </label>
         <select name="yarn[][brand_id]">
           <% current_user.brands.each do |brand| %>
@@ -103,6 +105,7 @@
     <br><br>
 
     <div>
+      <p>Yarn #3:</p>
       <label for="yarn[][brand_id]">Select a brand: </label>
         <select name="yarn[][brand_id]">
           <% current_user.brands.each do |brand| %>
@@ -131,8 +134,215 @@
 
     <br><br>
 
+    <div>
+      <p>Yarn #4:</p>
+      <label for="yarn[][brand_id]">Select a brand: </label>
+        <select name="yarn[][brand_id]">
+          <% current_user.brands.each do |brand| %>
+            <option value="<%= brand.id %>"> <%= brand.name %> </option>
+          <% end %>
+          <option value="" selected> Add to New Brand </option>
+        </select><br>
+
+      <label for="yarn[][color]">Color: </label><input type="text" name="yarn[][color]"><br>
+      <label for="yarn[][count]">How many full skeins: </label><input type="text" name="yarn[][count]"><br>
+      <label for="yarn[][scrap]">How much scrap: </label><input type="text" name="yarn[][scrap]"> oz.<br>
 
 
+      <label for="yarn[][project_id]">Select a project: </label>
+        <select name="yarn[][project_id]">
+          <% current_user.projects.each do |project| %>
+            <% if project.name == "Stash" %>
+              <option value="<%= project.id %>" selected> <%= project.name %> </option>
+            <% else %>
+              <option value="<%= project.id %>"> <%= project.name %> </option>
+            <% end %>
+          <% end %>
+          <option value=""> Add to New Project </option>
+        </select><br>
+    </div>
+
+    <br><br>
+
+    <div>
+      <p>Yarn #5:</p>
+      <label for="yarn[][brand_id]">Select a brand: </label>
+        <select name="yarn[][brand_id]">
+          <% current_user.brands.each do |brand| %>
+            <option value="<%= brand.id %>"> <%= brand.name %> </option>
+          <% end %>
+          <option value="" selected> Add to New Brand </option>
+        </select><br>
+
+      <label for="yarn[][color]">Color: </label><input type="text" name="yarn[][color]"><br>
+      <label for="yarn[][count]">How many full skeins: </label><input type="text" name="yarn[][count]"><br>
+      <label for="yarn[][scrap]">How much scrap: </label><input type="text" name="yarn[][scrap]"> oz.<br>
+
+
+      <label for="yarn[][project_id]">Select a project: </label>
+        <select name="yarn[][project_id]">
+          <% current_user.projects.each do |project| %>
+            <% if project.name == "Stash" %>
+              <option value="<%= project.id %>" selected> <%= project.name %> </option>
+            <% else %>
+              <option value="<%= project.id %>"> <%= project.name %> </option>
+            <% end %>
+          <% end %>
+          <option value=""> Add to New Project </option>
+        </select><br>
+    </div>
+
+    <br><br>
+
+    <div>
+      <p>Yarn #6:</p>
+      <label for="yarn[][brand_id]">Select a brand: </label>
+        <select name="yarn[][brand_id]">
+          <% current_user.brands.each do |brand| %>
+            <option value="<%= brand.id %>"> <%= brand.name %> </option>
+          <% end %>
+          <option value="" selected> Add to New Brand </option>
+        </select><br>
+
+      <label for="yarn[][color]">Color: </label><input type="text" name="yarn[][color]"><br>
+      <label for="yarn[][count]">How many full skeins: </label><input type="text" name="yarn[][count]"><br>
+      <label for="yarn[][scrap]">How much scrap: </label><input type="text" name="yarn[][scrap]"> oz.<br>
+
+
+      <label for="yarn[][project_id]">Select a project: </label>
+        <select name="yarn[][project_id]">
+          <% current_user.projects.each do |project| %>
+            <% if project.name == "Stash" %>
+              <option value="<%= project.id %>" selected> <%= project.name %> </option>
+            <% else %>
+              <option value="<%= project.id %>"> <%= project.name %> </option>
+            <% end %>
+          <% end %>
+          <option value=""> Add to New Project </option>
+        </select><br>
+    </div>
+
+    <br><br>
+
+    <div>
+      <p>Yarn #7:</p>
+      <label for="yarn[][brand_id]">Select a brand: </label>
+        <select name="yarn[][brand_id]">
+          <% current_user.brands.each do |brand| %>
+            <option value="<%= brand.id %>"> <%= brand.name %> </option>
+          <% end %>
+          <option value="" selected> Add to New Brand </option>
+        </select><br>
+
+      <label for="yarn[][color]">Color: </label><input type="text" name="yarn[][color]"><br>
+      <label for="yarn[][count]">How many full skeins: </label><input type="text" name="yarn[][count]"><br>
+      <label for="yarn[][scrap]">How much scrap: </label><input type="text" name="yarn[][scrap]"> oz.<br>
+
+
+      <label for="yarn[][project_id]">Select a project: </label>
+        <select name="yarn[][project_id]">
+          <% current_user.projects.each do |project| %>
+            <% if project.name == "Stash" %>
+              <option value="<%= project.id %>" selected> <%= project.name %> </option>
+            <% else %>
+              <option value="<%= project.id %>"> <%= project.name %> </option>
+            <% end %>
+          <% end %>
+          <option value=""> Add to New Project </option>
+        </select><br>
+    </div>
+
+    <br><br>
+
+    <div>
+      <p>Yarn #8:</p>
+      <label for="yarn[][brand_id]">Select a brand: </label>
+        <select name="yarn[][brand_id]">
+          <% current_user.brands.each do |brand| %>
+            <option value="<%= brand.id %>"> <%= brand.name %> </option>
+          <% end %>
+          <option value="" selected> Add to New Brand </option>
+        </select><br>
+
+      <label for="yarn[][color]">Color: </label><input type="text" name="yarn[][color]"><br>
+      <label for="yarn[][count]">How many full skeins: </label><input type="text" name="yarn[][count]"><br>
+      <label for="yarn[][scrap]">How much scrap: </label><input type="text" name="yarn[][scrap]"> oz.<br>
+
+
+      <label for="yarn[][project_id]">Select a project: </label>
+        <select name="yarn[][project_id]">
+          <% current_user.projects.each do |project| %>
+            <% if project.name == "Stash" %>
+              <option value="<%= project.id %>" selected> <%= project.name %> </option>
+            <% else %>
+              <option value="<%= project.id %>"> <%= project.name %> </option>
+            <% end %>
+          <% end %>
+          <option value=""> Add to New Project </option>
+        </select><br>
+    </div>
+
+    <br><br>
+
+    <div>
+      <p>Yarn #9:</p>
+      <label for="yarn[][brand_id]">Select a brand: </label>
+        <select name="yarn[][brand_id]">
+          <% current_user.brands.each do |brand| %>
+            <option value="<%= brand.id %>"> <%= brand.name %> </option>
+          <% end %>
+          <option value="" selected> Add to New Brand </option>
+        </select><br>
+
+      <label for="yarn[][color]">Color: </label><input type="text" name="yarn[][color]"><br>
+      <label for="yarn[][count]">How many full skeins: </label><input type="text" name="yarn[][count]"><br>
+      <label for="yarn[][scrap]">How much scrap: </label><input type="text" name="yarn[][scrap]"> oz.<br>
+
+
+      <label for="yarn[][project_id]">Select a project: </label>
+        <select name="yarn[][project_id]">
+          <% current_user.projects.each do |project| %>
+            <% if project.name == "Stash" %>
+              <option value="<%= project.id %>" selected> <%= project.name %> </option>
+            <% else %>
+              <option value="<%= project.id %>"> <%= project.name %> </option>
+            <% end %>
+          <% end %>
+          <option value=""> Add to New Project </option>
+        </select><br>
+    </div>
+
+    <br><br>
+
+    <div>
+      <p>Yarn #10:</p>
+      <label for="yarn[][brand_id]">Select a brand: </label>
+        <select name="yarn[][brand_id]">
+          <% current_user.brands.each do |brand| %>
+            <option value="<%= brand.id %>"> <%= brand.name %> </option>
+          <% end %>
+          <option value="" selected> Add to New Brand </option>
+        </select><br>
+
+      <label for="yarn[][color]">Color: </label><input type="text" name="yarn[][color]"><br>
+      <label for="yarn[][count]">How many full skeins: </label><input type="text" name="yarn[][count]"><br>
+      <label for="yarn[][scrap]">How much scrap: </label><input type="text" name="yarn[][scrap]"> oz.<br>
+
+
+      <label for="yarn[][project_id]">Select a project: </label>
+        <select name="yarn[][project_id]">
+          <% current_user.projects.each do |project| %>
+            <% if project.name == "Stash" %>
+              <option value="<%= project.id %>" selected> <%= project.name %> </option>
+            <% else %>
+              <option value="<%= project.id %>"> <%= project.name %> </option>
+            <% end %>
+          <% end %>
+          <option value=""> Add to New Project </option>
+        </select><br>
+    </div>
+
+    <br>
 
   <input type="submit" value="Add Yarn">
 </form>

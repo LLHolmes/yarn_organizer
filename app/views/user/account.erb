@@ -1,5 +1,5 @@
 <h1>Hello, <%= current_user.name %>!</h1>
-<h3>Update your account:</h3>
+<h3>Update my account:</h3>
   <form action="/account/<%= current_user.id %>" method="post">
     <input id="hidden" type="hidden" name="_method" value="patch">
     <label for="name">Name: </label><input type="text" name="name" placeholder="<%= current_user.name%>"><br>
