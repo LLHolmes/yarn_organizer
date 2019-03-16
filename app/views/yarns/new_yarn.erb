@@ -7,11 +7,14 @@
   <label for="yarn[scrap]">How much scrap: </label><input type="text" name="yarn[scrap]"> oz.<br>
 
   <h3><label for="yarn[brand_id]">Select a Brand: </label></h3>
-  <% current_user.brands.uniq.each do |brand| %>
-    <input type="radio" name="yarn[brand_id]" value="<%= brand.id %>"> <%= brand.name %>
-  <% end %>
+  <select name="yarn[brand_id]">
+    <option value="" selected> Add to New Brand </option>
+    <% current_user.brands.uniq.each do |brand| %>
+      <option value="<%= brand.id %>"> <%= brand.name %> </option>
+    <% end %>
+  </select><br>
 
-    <h4>Create a new brand:</h4>
+    <h4>If creating a new brand:</h4>
     <label for="brand[name]">Brand Name: </label><input type="text" name="brand[name]"><br>
     <label for="brand[material]">Select Material: </label>
     <select name="brand[material]">
@@ -39,12 +42,15 @@
 
 
   <h3><label for="yarn[project_id]">Add to a project? </label></h3>
-  <% current_user.projects.each do |project| %>
-    <input type="radio" name="yarn[project_id]" value="<%= project.id %>"> <%= project.name %>
-  <% end %>
-  <p>* New yarn will default to your "Stash" project. *</p>
+  <select name="yarn[project_id]">
+    <option value="" selected> Add to New Project </option>
+    <% current_user.projects.each do |project| %>
+      <option value="<%= project.id %>"> <%= project.name %> </option>
+    <% end %>
+  </select>
+  <p>* New yarn will default to your "Stash" project unless otherwise specified. *</p>
 
-  <h4>Create a new project:</h4>
+  <h4>If creating a new project:</h4>
     <label for="project[name]">Project Name: </label><input type="text" name="project[name]">
     <label for="project[status]">Status: </label>
     <select name="project[status]">

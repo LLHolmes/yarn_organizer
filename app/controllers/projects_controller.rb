@@ -146,11 +146,13 @@ class ProjectsController < ApplicationController
           acc.save
         end
       end
-      params[:yarn].each do |yarn_data|
-        yarn = Yarn.find(yarn_data[:id])
-        yarn.update(yarn_data)
-        yarn.project = current_user.stash
-        yarn.save
+      if params[:yarn]
+        params[:yarn].each do |yarn_data|
+          yarn = Yarn.find(yarn_data[:id])
+          yarn.update(yarn_data)
+          yarn.project = current_user.stash
+          yarn.save
+        end
       end
 
       if @project.save

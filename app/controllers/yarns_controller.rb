@@ -19,18 +19,23 @@ class YarnsController < ApplicationController
   post '/yarns/new' do
     if params[:yarn][:color] == ""
       flash.now[:warning] = "Please specify a yarn color."
-      redirect '/accessories/new'
-    elsif params[:yarn][:brand_id] == nil && params[:brand][:name] == ""
+      redirect '/yans/new'
+    elsif params[:yarn][:brand_id] == "" && params[:brand][:name] == ""
       flash.now[:warning] = "Please specify a brand."
-      redirect '/accessories/new'
+      redirect '/yarns/new'
     else
       @yarn = Yarn.new(params[:yarn])
-      if params[:yarn][:brand_id] == nil
-        @brand = Brand.create(params[:brand])
-        @yarn.brand = @brand
+      if params[:yarn][:brand_id] == ""
+        if params[:brand][:name] == ""
+          flash.now[:warning] = "Please chose a brand.  Otherwise, new brands require a name."
+          redirect '/yarns/new'
+        else
+          @brand = Brand.create(params[:brand])
+          @yarn.brand = @brand
+        end
       end
 
-      if params[:yarn][:project_id] == nil
+      if params[:yarn][:project_id] == ""
         if params[:project][:name] != ""
           @project = Project.new(params[:project])
           @project.user = current_user
@@ -65,6 +70,7 @@ class YarnsController < ApplicationController
     if params[:project][:name] != "" || params[:project][:pattern_info] != "" || params[:project][:notes] != ""
       if params[:project][:name] == ""
         flash.now[:warning] = "Your project was not saved. All projects need names."
+        redirect '/yarns/new_bulk'
       else
         @new_project = Project.new(params[:project])
         @new_project.user = current_user

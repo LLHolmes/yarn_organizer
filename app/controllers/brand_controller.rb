@@ -79,7 +79,7 @@ class BrandsController < ApplicationController
       redirect "/brands/#{@brand.id}"
     end
     flash.now[:unauthorized] = "You may not edit other crafter's brands."
-    redirect '/brand'
+    redirect '/brands'
   end
 
   delete '/brands/:id/delete' do

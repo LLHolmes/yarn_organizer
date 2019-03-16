@@ -22,7 +22,13 @@ Or install it yourself as:
 
 ## Usage
 
-TODO: Write usage instructions here
+Add yarn to your virtual stash to track what yarn you have available for your crafting projects.  Upon joining, you will automatically be given a "Stash" project and be taken a page where you can add multiple yarns at once to stock your stash.  Your "Stash" will be your default project where all yarns will be added unless you specify a project.  If you have an account and log in, you will be taken to your Home page that displays all your Projects, Yarn, and Tools.
+
+At the top of all pages you will find quick access to your Home, My Projects, My Yarn, and My Tools indexes, along with links to add a New Project, New Tool, New Yarn, or add Many New Yarns (which will take you back to the stock your stash page you were first taken to when you joined).  You can visit Account Details if you want to change your password or delete your account. Log Out will end your session.
+
+On each index page (My Projects, My Yarn, and My Tools) you can visit an individual item and can choose to update it or delete it.  If you delete a Project, all associated yarn and tools will be added to your "Stash".  If you finish a project, you will be taken to a secondary page where you should update the amount of yarn you have remaining after completing your project so your stash will be up to date.  When finishing a project, all yarn and tools will be added back into your "Stash".
+
+Have fun!
 
 ## Development
 

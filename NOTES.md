@@ -70,8 +70,7 @@ Specs:
     -- Lots of validations
 - [x] BONUS - not required - Display validation failures to user with error message (example form URL e.g. /posts/new)
     -- Flash messages added
-- [.] Your README.md includes a short description, install instructions, a contributors guide and a link to the license for your code
-    -- Need to add Usage instructions!
+- [x] Your README.md includes a short description, install instructions, a contributors guide and a link to the license for your code
 
 Confirm:
 - [x] You have a large number of small Git commits

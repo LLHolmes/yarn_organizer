@@ -3,10 +3,16 @@
   <label for="name">Name/Description: </label><input type="text" name="name" required><br>
 
   <h3><label for="project_id">Add to a project? </label></h3>
-  <% current_user.projects.each do |project| %>
-    <input type="radio" name="project_id" value="<%= project.id %>"> <%= project.name %>
-  <% end %>
-  <p>* New yarn will default to your "Stash" project. *</p>
+  <select name="project_id">
+    <% current_user.projects.each do |project| %>
+      <% if project.name == "Stash" %>
+        <option value="<%= project.id %>"> <%= project.name %> </option>
+        <% else %>
+        <option value="<%= project.id %>"> <%= project.name %> </option>
+      <% end %>
+    <% end %>
+  </select>
+  <p>* New tools/accessories will default to your "Stash" project unless otherwise specified. *</p>
 
   <br>
   <input type="submit" value="Add Tool">
