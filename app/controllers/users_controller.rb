@@ -40,6 +40,7 @@ class UsersController < ApplicationController
         redirect '/'
       end
     end
+    flash.next[:warning] = "It looks like you're not yet a memeber our community. Please join."
     redirect '/signup'
   end
 

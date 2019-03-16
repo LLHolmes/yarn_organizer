@@ -1,14 +1,22 @@
 class ProjectsController < ApplicationController
 
   get '/projects' do
-    @wip = current_user.projects_wip
-    @upcoming = current_user.projects_upcoming
-    @finished = current_user.projects_finished
-    erb :"projects/index_projects"
+    if logged_in?
+      @wip = current_user.projects_wip
+      @upcoming = current_user.projects_upcoming
+      @finished = current_user.projects_finished
+      erb :"projects/index_projects"
+    else
+      redirect '/login'
+    end
   end
 
   get '/projects/new' do
-    erb :"projects/new_project"
+    if logged_in?
+      erb :"projects/new_project"
+    else
+      redirect '/login'
+    end
   end
 
   post '/projects/new' do
@@ -43,26 +51,34 @@ class ProjectsController < ApplicationController
   end
 
   get '/projects/:id' do
-    @project = Project.find(params[:id])
-    if current_user != @project.user
-      flash.next[:unauthorized] = "You may not view other crafter's projects."
-      redirect '/projects'
-    elsif @project.name == "Stash"
-      erb :"projects/show_stash"
+    if logged_in?
+      @project = Project.find(params[:id])
+      if current_user != @project.user
+        flash.next[:unauthorized] = "You may not view other crafter's projects."
+        redirect '/projects'
+      elsif @project.name == "Stash"
+        erb :"projects/show_stash"
+      else
+        erb :"projects/show_project"
+      end
     else
-      erb :"projects/show_project"
+      redirect '/login'
     end
   end
 
   get '/projects/:id/edit' do
-    @project = Project.find(params[:id])
-    if current_user != @project.user
-      flash.next[:unauthorized] = "You may not edit other crafter's projects."
-      redirect '/projects'
-    elsif @project.name == "Stash"
-      erb :"projects/edit_stash"
+    if logged_in?
+      @project = Project.find(params[:id])
+      if current_user != @project.user
+        flash.next[:unauthorized] = "You may not edit other crafter's projects."
+        redirect '/projects'
+      elsif @project.name == "Stash"
+        erb :"projects/edit_stash"
+      else
+        erb :"projects/edit_project"
+      end
     else
-      erb :"projects/edit_project"
+      redirect '/login'
     end
   end
 
@@ -104,12 +120,16 @@ class ProjectsController < ApplicationController
   end
 
   get '/projects/:id/finished_edit' do
-    @project = Project.find(params[:id])
-    if current_user != @project.user
-      flash.next[:unauthorized] = "You may not edit other crafter's projects."
-      redirect '/projects'
+    if logged_in?
+      @project = Project.find(params[:id])
+      if current_user != @project.user
+        flash.next[:unauthorized] = "You may not edit other crafter's projects."
+        redirect '/projects'
+      end
+      erb :"projects/edit_finished_project"
+    else
+      redirect '/login'
     end
-    erb :"projects/edit_finished_project"
   end
 
   patch '/projects/:id/finished' do
@@ -126,7 +146,6 @@ class ProjectsController < ApplicationController
           acc.save
         end
       end
-      binding.pry
       params[:yarn].each do |yarn_data|
         yarn = Yarn.find(yarn_data[:id])
         yarn.update(yarn_data)

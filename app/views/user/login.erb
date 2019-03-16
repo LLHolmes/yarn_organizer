@@ -1,8 +1,9 @@
 <% if logged_in? %>
   <p>Hello, <%=current_user.name %>!</p>
-  <p>You are currently logged in.</p>
+  <p>You are currently logged in to the yarn organizer.</p>
 <% else %>
-  <h1>Welcome, Crafter!</h1>
+  <h1>Welcome to the Yarn Stash Organizer, Crafter!</h1>
+  <h2>Please log in!</h2>
   <form action="/login" method="post">
       <label for="email">Email: </label><input type="text" name="email" required><br>
       <label for="password">Password: </label><input type="password" name="password" required><br>

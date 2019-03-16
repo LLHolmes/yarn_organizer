@@ -1,11 +1,19 @@
 class YarnsController < ApplicationController
 
   get '/yarns' do
-    erb :"yarns/index_yarns"
+    if logged_in?
+      erb :"yarns/index_yarns"
+    else
+      redirect '/login'
+    end
   end
 
   get '/yarns/new' do
-    erb :"yarns/new_yarn"
+    if logged_in?
+      erb :"yarns/new_yarn"
+    else
+      redirect '/login'
+    end
   end
 
   post '/yarns/new' do
@@ -42,7 +50,11 @@ class YarnsController < ApplicationController
   end
 
   get '/yarns/new_bulk' do
-    erb :"yarns/new_yarn_bulk"
+    if logged_in?
+      erb :"yarns/new_yarn_bulk"
+    else
+      redirect '/login'
+    end
   end
 
   post '/yarns/new_bulk' do
@@ -79,22 +91,30 @@ class YarnsController < ApplicationController
   end
 
   get '/yarns/:id' do
-    @yarn = Yarn.find(params[:id])
-    if current_user == @yarn.project.user
-      erb :"yarns/show_yarn"
+    if logged_in?
+      @yarn = Yarn.find(params[:id])
+      if current_user == @yarn.project.user
+        erb :"yarns/show_yarn"
+      else
+        flash.next[:unauthorized] = "You may not view other crafter's yarn."
+        redirect '/yarns'
+      end
     else
-      flash.next[:unauthorized] = "You may not view other crafter's yarn."
-      redirect '/yarns'
+      redirect '/login'
     end
   end
 
   get '/yarns/:id/edit' do
-    @yarn = Yarn.find(params[:id])
-    if current_user == @yarn.project.user
-      erb :"yarns/edit_yarn"
+    if logged_in?
+      @yarn = Yarn.find(params[:id])
+      if current_user == @yarn.project.user
+        erb :"yarns/edit_yarn"
+      else
+        flash.next[:unauthorized] = "You may not edit other crafter's yarn."
+        redirect '/yarns'
+      end
     else
-      flash.next[:unauthorized] = "You may not edit other crafter's yarn."
-      redirect '/yarns'
+      redirect '/login'
     end
   end
 

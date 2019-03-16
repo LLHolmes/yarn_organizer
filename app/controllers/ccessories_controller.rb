@@ -1,15 +1,22 @@
 class CcessoriesController < ApplicationController
 
   get '/accessories' do
-    erb :"accessories/index_accessories"
+    if logged_in?
+      erb :"accessories/index_accessories"
+    else
+      redirect '/login'
+    end
   end
 
   get '/accessories/new' do
-    erb :"accessories/new_accessory"
+    if logged_in?
+      erb :"accessories/new_accessory"
+    else
+      redirect '/login'
+    end
   end
 
   post '/accessories/new' do
-    binding.pry
     if params[:name] == ""
       flash.now[:warning] = "Please give your tool a name."
       redirect '/accessories/new'
@@ -32,22 +39,30 @@ class CcessoriesController < ApplicationController
   end
 
   get '/accessories/:id' do
-    @accessory = Accessory.find(params[:id])
-    if current_user == @accessory.project.user
-      erb :"accessories/show_accessory"
+    if logged_in?
+      @accessory = Accessory.find(params[:id])
+      if current_user == @accessory.project.user
+        erb :"accessories/show_accessory"
+      else
+        flash.next[:unauthorized] = "You may not view other crafter's tools."
+        redirect '/accessories'
+      end
     else
-      flash.next[:unauthorized] = "You may not view other crafter's tools."
-      redirect '/accessories'
+      redirect '/login'
     end
   end
 
   get '/accessories/:id/edit' do
-    @accessory = Accessory.find(params[:id])
-    if current_user == @accessory.project.user
-      erb :"accessories/edit_accessory"
+    if logged_in?
+      @accessory = Accessory.find(params[:id])
+      if current_user == @accessory.project.user
+        erb :"accessories/edit_accessory"
+      else
+        flash.next[:unauthorized] = "You may not edit other crafter's tools."
+        redirect '/accessories'
+      end
     else
-      flash.next[:unauthorized] = "You may not edit other crafter's tools."
-      redirect '/accessories'
+      redirect '/login'
     end
   end
 

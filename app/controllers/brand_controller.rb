@@ -1,20 +1,28 @@
 class BrandsController < ApplicationController
 
   get '/brands' do
-    @lace = current_user.brand_by_weight("0")
-    @sock = current_user.brand_by_weight("1")
-    @fine = current_user.brand_by_weight("2")
-    @light = current_user.brand_by_weight("3")
-    @medium = current_user.brand_by_weight("4")
-    @bulky = current_user.brand_by_weight("5")
-    @super_bulky = current_user.brand_by_weight("6")
-    @jumbo = current_user.brand_by_weight("7")
-    @novelty = current_user.brand_by_weight("Novelty")
-    erb :"brands/index_brands"
+    if logged_in?
+      @lace = current_user.brand_by_weight("0")
+      @sock = current_user.brand_by_weight("1")
+      @fine = current_user.brand_by_weight("2")
+      @light = current_user.brand_by_weight("3")
+      @medium = current_user.brand_by_weight("4")
+      @bulky = current_user.brand_by_weight("5")
+      @super_bulky = current_user.brand_by_weight("6")
+      @jumbo = current_user.brand_by_weight("7")
+      @novelty = current_user.brand_by_weight("Novelty")
+      erb :"brands/index_brands"
+    else
+      redirect '/login'
+    end
   end
 
   get '/brands/new' do
-    erb :"brands/new_brand"
+    if logged_in?
+      erb :"brands/new_brand"
+    else
+      redirect '/login'
+    end
   end
 
   post '/brands/new' do
@@ -35,23 +43,31 @@ class BrandsController < ApplicationController
   end
 
   get '/brands/:id' do
-    @brand = Brand.find(params[:id])
-    @brand_yarns = current_user.brand_yarns(@brand)
-    if current_user.brands.include?(@brand)
-      erb :"brands/show_brand"
+    if logged_in?
+      @brand = Brand.find(params[:id])
+      @brand_yarns = current_user.brand_yarns(@brand)
+      if current_user.brands.include?(@brand)
+        erb :"brands/show_brand"
+      else
+        flash.next[:unauthorized] = "You may not view other crafter's brands."
+        redirect '/brands'
+      end
     else
-      flash.next[:unauthorized] = "You may not view other crafter's brands."
-      redirect '/brands'
+      redirect '/login'
     end
   end
 
   get '/brands/:id/edit' do
-    @brand = Brand.find(params[:id])
-    if current_user.brands.include?(@brand)
-      erb :"brands/edit_brand"
+    if logged_in?
+      @brand = Brand.find(params[:id])
+      if current_user.brands.include?(@brand)
+        erb :"brands/edit_brand"
+      else
+        flash.next[:unauthorized] = "You may not edit other crafter's brands."
+        redirect '/brands'
+      end
     else
-      flash.next[:unauthorized] = "You may not edit other crafter's brands."
-      redirect '/brands'
+      redirect '/login'
     end
   end
 

@@ -1,13 +1,4 @@
 To Do:
-try to break / figure out scrap .7oz
-test show_project amount of Yarns
-test edit_yarn, delete_yarn & edit_brand, delete_brand
-test edit_finished_project Project edit --> finished --> updates and moves yarn to stash
-
-Clean up layout & flow (adjust user home/index?):
-  Once logged in, shows welcome with master index of things individual user can do?:
- - start a new project / add a new yarn/accessory
- - find my project/yarn/accessory
 Try to break it / test everything:
  - Double check current_user == @project.user validations, etc.
 CSS if possible
@@ -87,3 +78,4 @@ Confirm:
 - [x] Your commit messages are meaningful
 - [x] You made the changes in a commit that relate to the commit message
 - [.] You don't include changes in a commit that aren't related to the commit message
+    -- Got better and worse and better at this as I went on...
