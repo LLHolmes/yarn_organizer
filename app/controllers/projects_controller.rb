@@ -88,6 +88,11 @@ class ProjectsController < ApplicationController
       flash.now[:unauthorized] = "You may not edit other crafter's projects."
       redirect '/projects'
     end
+    name_check = Project.all.select { |project| project.name == params[:name] }
+    if name_check.count > 1 || Project.find_by_name(params[:name]) != @project
+      flash.next[:unauthorized] = "You already have a project with that name. Please choose another."
+      redirect '/projects'
+    end
 
     @project.update(params[:project])
     if params[:yarns]

@@ -55,8 +55,16 @@ class UsersController < ApplicationController
   patch '/account/:id' do
     user = User.find(params[:id])
     user.name = params[:name] unless params[:name] == ""
-    user.email = params[:email] unless params[:email] == ""
     user.password = params[:password] unless params[:password] == ""
+    if params[:email] != ""
+      email_check = User.all.select { |user| user.email == params[:email] }
+      if email_check.count > 1 || User.find_by_email(params[:email]) != user
+        flash.next[:warning] = "It looks like another member is using that email."
+        redirect '/account'
+      else
+        user.email = params[:email] unless params[:email] == ""
+      end
+    end
     user.save
     redirect "/account"
   end
