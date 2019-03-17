@@ -2,7 +2,6 @@
 
   <form action="/projects/<%= @project.id %>" method="post">
     <input id="hidden" type="hidden" name="_method" value="patch">
-    <label for="project[name]">Name: </label><input type="text" name="project[name]" value="<%= @project.name%>" required><br>
     <label for="project[notes]">Notes: </label><br>
     <textarea rows="5" cols="60" name="project[notes]" value="<%= @project.notes%>"></textarea><br>
 
