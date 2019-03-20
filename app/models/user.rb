@@ -3,6 +3,7 @@ class User < ActiveRecord::Base
   has_many :yarns, -> { distinct }, through: :projects
   has_many :brands, -> { distinct }, through: :yarns
   has_many :accessories, -> { distinct }, through: :projects
+  validates_uniqueness_of :email
 
   has_secure_password
 

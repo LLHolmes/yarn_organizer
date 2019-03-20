@@ -12,9 +12,6 @@ class UsersController < ApplicationController
     if params[:name] == "" || params[:email] == "" || params[:password] == ""
       flash.next[:error] = "Please fill out all fields."
       redirect '/signup'
-    elsif User.find_by_email(params[:email])
-      flash.next[:warning] = "It looks like you're already a memeber of our community. Please log in."
-      redirect '/login'
     else
       user = User.new(params)
       if user.save
@@ -23,6 +20,9 @@ class UsersController < ApplicationController
         stash.save
         session[:user_id] = user.id
         redirect '/yarns/new_bulk'
+      else
+        flash.next[:warning] = user.errors.full_messages[0]
+        redirect '/login'
       end
     end
     flash.next[:error] = "Something went wrong.  Please try again."
@@ -57,13 +57,7 @@ class UsersController < ApplicationController
     user.name = params[:name] unless params[:name] == ""
     user.password = params[:password] unless params[:password] == ""
     if params[:email] != ""
-      email_check = User.all.select { |user| user.email == params[:email] }
-      if email_check.count > 1 || User.find_by_email(params[:email]) != user
-        flash.next[:warning] = "It looks like another member is using that email."
-        redirect '/account'
-      else
-        user.email = params[:email] unless params[:email] == ""
-      end
+      user.email = params[:email] unless params[:email] == ""
     end
     user.save
     redirect "/account"
